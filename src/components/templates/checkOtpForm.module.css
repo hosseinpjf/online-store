@@ -1,0 +1,40 @@
+.form{
+    width: 100%;
+    max-width: 600px;
+    padding: 40px 20px;
+    border: 2px solid #ccc;
+    border-radius: 50px 20px;
+    margin: 200px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+    background-color: #f6f6f6;
+}
+
+.form input{
+    border: 1px solid #aaa;
+    outline: none;
+    padding: 10px;
+    border-radius: 10px 5px;
+    align-self: stretch;
+    background-color: transparent;
+}
+
+.form button:first-of-type{
+    border: none;
+    background-color: #53002b;
+    padding: 10px 30px;
+    border-radius: 10px 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.form button:last-of-type{
+    border: 1px solid #53002b;
+    background-color: transparent;
+    color: #53002b;
+    padding: 10px 30px;
+    border-radius: 10px 5px;
+    cursor: pointer;
+}

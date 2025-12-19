@@ -1,0 +1,44 @@
+.list{
+    padding: 20px;
+}
+
+.list ul{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.list li{
+    flex: 1 1 auto;
+    list-style-type: none;
+    border-radius: 10px 5px;
+    border: 2px solid #ccc;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list li span:first-of-type{
+    margin-left: auto;
+}
+
+.list li span:last-of-type{
+    color: #53002b;
+    margin: 0 10px;
+}
+
+.list li button{
+    padding: 3px 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px 5px;
+    cursor: pointer;
+    transition: all .2s;
+    color: #606060;
+}
+
+.list li button:hover{
+    background-color: #53002b;
+    color: #fff;
+}
