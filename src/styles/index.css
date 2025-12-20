@@ -1,25 +1,104 @@
 :root {
   font-family: "Vazir", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.5;
+
+  /* پس‌زمینه کل سایت */
+  --color-background: #f7f8fa;
+  /* رنگ پس زمینه دوم */
+  --color-side: #f0f2f5;
+  /* رنگ باکس‌ها یا کارت‌ها */
+  --color-surface: #fafafa;
+  /* متن اصلی */
+  --color-main-text: #212529;
+  /* رنگ تاکید */
+  --color-accent: #ff5722;
+  /* رنگ موفقیت */
+  --color-success: #28a745;
+  /* رنگ خطا */
+  --color-error: #dc3545;
+  /* رنگ هشدار */
+  --color-warning: #ffc107;
+  /* رنگ لینک */
+  --color-link: #0d6efd;
+  /* رنگ غیر فعال */
+  --color-disabled: #adb5bd;
+  /* زیر متن ها */
+  --color-secondary: #6c757d;
+  /* رنگ خنثی */
+  --color-neutral: #808080;
+  /* hover */
+  --hover-smooth: #e9ecef;
+  /* border */
+  --border-color: #e0e0e0;
+
+
+  /* پس‌زمینه کل سایت
+  --color-background: #121212;
+  رنگ پس زمینه دوم
+  --color-side: #1e1e1e;
+  رنگ باکس‌ها یا کارت‌ها
+  --color-surface: #1a1a1a;
+  متن اصلی
+  --color-main-text: #f1f3f5;
+  رنگ تاکید
+  --color-accent: #ff7043;
+  رنگ موفقیت
+  --color-success: #4caf50;
+  رنگ خطا
+  --colot-error: #f44336;
+  رنگ هشدار
+  --color-warning: #ffc107;
+  رنگ لینک
+  --color-link: #4da3ff;
+  رنگ غیر فعال
+  --color-disabled: #6c757d;
+  زیر متن ها
+  --color-secondary: #9ca3af;
+  رنگ خنثی
+  --color-neutral: #808080;
+  hover
+  --hover-smooth: #2a2a2a;
+  border
+  --border-color: #2c2c2c; */
+
+
+  /* فونت */
+  --main-font: "Vazir", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* انیمیشن تغییر رنگ صفحه */
+  --change-color: background-color 0s linear, color 0s linear;
+}
+
+/* ---------------------------< Basic tag structure >--------------------------- */
+
+* {
+  direction: rtl;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--main-font), sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-main-text);
 }
 
 body {
-  margin: auto;
-  max-width: 1400px;
-  min-height: 100vh;
-  /* padding: 10px; */
+  background-color: var(--color-background);
+  font-family: var(--main-font), sans-serif;
+  min-height: 100dvh;
+  max-width: 1440px;
+  min-width: 320px;
+  margin: 0 auto;
 }
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+ul {
+  list-style-type: none;
 }
 
 a {
   text-decoration: inherit;
   color: inherit;
+  display: inline-block;
 }
 
 button,
@@ -39,4 +118,118 @@ button:active {
 
 button:disabled {
   opacity: 0.5;
+}
+
+input {
+  box-shadow: none !important;
+  color: var(--color-main-text) !important;
+  font-weight: 100;
+}
+
+::placeholder {
+  color: var(--border-color) !important;
+}
+
+/* ---------------------------< Utility Classes >--------------------------- */
+
+.bg-body {
+  background-color: var(--color-background) !important;
+}
+
+.bg-side {
+  background-color: var(--color-side) !important;
+}
+
+.bg-surface {
+  background-color: var(--color-surface) !important;
+}
+
+/* .bg-main-text {
+  background-color: var(--color-main-text) !important;
+} */
+
+.bg-accent {
+  background-color: var(--color-accent) !important;
+}
+
+.bg-success {
+  background-color: var(--color-success) !important;
+}
+
+.bg-error {
+  background-color: var(--color-error) !important;
+}
+
+.bg-warning {
+  background-color: var(--color-warning) !important;
+}
+
+.bg-link {
+  background-color: var(--color-link) !important;
+}
+
+.bg-disabled {
+  background-color: var(--color-disabled) !important;
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary) !important;
+}
+
+.bg-neutral {
+  background-color: var(--color-neutral) !important;
+}
+
+.bg-hover-smooth:hover {
+  background-color: var(--hover-smooth) !important;
+  transition: background-color .1s ease;
+}
+
+.color-body {
+  color: var(--color-background) !important;
+}
+
+.color-surface {
+  color: var(--color-surface) !important;
+}
+
+.color-main-text {
+  color: var(--color-main-text) !important;
+}
+
+.color-success {
+  color: var(--color-success) !important;
+}
+
+.color-accent {
+  color: var(--color-accent) !important;
+}
+
+.color-secondary {
+  color: var(--color-secondary) !important;
+}
+
+.color-hover-smooth:hover {
+  color: var(--hover-smooth) !important;
+  transition: color .1s ease;
+}
+
+.border-color {
+  border-color: var(--border-color) !important;
+}
+
+.image-fit {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.direction-ltr {
+  direction: ltr;
+}
+
+.single-line {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
