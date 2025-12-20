@@ -11,6 +11,8 @@
   --color-surface: #fafafa;
   /* متن اصلی */
   --color-main-text: #212529;
+  /* متن کنار */
+  --color-side-text: #f1f3f5;
   /* رنگ تاکید */
   --color-accent: #ff5722;
   /* رنگ موفقیت */
@@ -41,6 +43,8 @@
   --color-surface: #1a1a1a;
   متن اصلی
   --color-main-text: #f1f3f5;
+  متن کنار
+  --color-side-text: #212529;
   رنگ تاکید
   --color-accent: #ff7043;
   رنگ موفقیت
