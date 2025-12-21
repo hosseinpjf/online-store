@@ -8,13 +8,15 @@ import { CgMenu } from "react-icons/cg";
 
 import { deleteCookie, getCookie } from "utils/cookie"
 import { getProfile } from "services/user";
+import useStore from "store/store";
 
 import styles from "./header.module.css"
 
-function Header({ setShowOffcanvas }) {
+function Header() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const refreshToken = getCookie('refreshToken');
+    const { setShowOffcanvas } = useStore();
 
     const { data, isError } = useQuery({
         queryKey: ['profile'],

@@ -1,7 +1,11 @@
+import useStore from "store/store";
+
 import styles from "./sidebar.module.css"
 
 function Sidebar({ categories, setSearchParams, searchParams }) {
     const categoryParams = searchParams.get('category');
+    const { showOffcanvas } = useStore();
+    console.log(showOffcanvas);
 
     const addUrlQuery = slug => {
         setSearchParams({ category: slug });

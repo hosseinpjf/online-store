@@ -9,6 +9,7 @@ const paths = [
     "pages",
     "router",
     "services",
+    "store",
     "styles",
     "utils",
 ];
