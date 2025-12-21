@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "react-bootstrap";
 import { BiLogInCircle, BiLogOutCircle } from "react-icons/bi"
@@ -17,6 +17,7 @@ function Header() {
     const queryClient = useQueryClient();
     const refreshToken = getCookie('refreshToken');
     const { setShowOffcanvas } = useStore();
+    const location = useLocation();
 
     const { data, isError } = useQuery({
         queryKey: ['profile'],
@@ -33,11 +34,13 @@ function Header() {
 
     return (
         <header className={`${styles.header} bg-side position-sticky top-0 border-bottom border-neutral d-flex gap-3 align-items-center justify-content-between px-3 px-md-4`}>
-            <div className="d-xl-none">
-                <Button onClick={() => setShowOffcanvas(true)} className="bg-transparent border-0 p-0">
-                    <CgMenu fontSize="28px" />
-                </Button>
-            </div>
+            {location.pathname == '/' && (
+                <div className="d-xl-none">
+                    <Button onClick={() => setShowOffcanvas(true)} className="bg-transparent border-0 p-0">
+                        <CgMenu fontSize="28px" />
+                    </Button>
+                </div>
+            )}
             <div className={`${styles.headerLogo} overflow-hidden h-100`}>
                 <Link to='/' className="w-100 h-100">
                     <img src="divar.svg" alt="" className="w-100 h-100" />
