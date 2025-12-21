@@ -250,6 +250,10 @@ input {
   overflow: hidden;
 }
 
+.color-side-svg path {
+    color: var(--color-side-text) !important;
+}
+
 /* ---------------------------< Global Classes >--------------------------- */
 
 .offcanvas-body .list-group-item:hover {

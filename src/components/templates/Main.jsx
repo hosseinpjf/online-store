@@ -23,14 +23,13 @@ function Main({ posts, searchParams, categories }) {
     }, [searchParams]);
 
     return (
-        <div className="p-3">
+        <div className="py-4 px-1 px-sm-3 py-md-5 w-100">
             {!!displayed?.length ? (
-                <div className="p-0 m-0 d-flex flex-wrap gap-4 justify-content-evenly">
+                <div className="p-0 m-0 d-flex flex-wrap gap-2 gap-sm-3 gap-lg-4 gap-xxl-5 justify-content-center justify-content-md-evenly">
                     {displayed?.map(post => (
                         <PostCard key={post._id} post={post} />
                     ))}
-
-                </div >
+                </div>
             ) : (
                 <p>در این دسته بندی هیچ پستی وجود ندارد</p>
             )}

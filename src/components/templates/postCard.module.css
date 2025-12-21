@@ -1,0 +1,36 @@
+.parent {
+    width: calc((100vw / 2) - .5rem);
+    max-width: 200px;
+}
+
+.parent p,
+.parent span {
+    font-size: 14px;
+}
+
+.parent h4 {
+    font-size: 16px;
+}
+
+@media (min-width: 768px) {
+    .parent {
+        width: 250px;
+        max-width: none;
+    }
+
+    .parent p,
+    .parent span {
+        font-size: initial;
+    }
+
+    .parent h4 {
+        font-size: 1.25rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .parent {
+        width: 300px;
+        max-width: none;
+    }
+}

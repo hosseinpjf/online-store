@@ -48,30 +48,30 @@ function Header() {
             </div>
             <div className="btn-group gap-2">
                 {data?.role == 'ADMIN' && (
-                    <Button className={`${styles.sign} bg-transparent p-0 border-neutral bg-neutral rounded-2`}>
+                    <Button className="bg-transparent p-0 border-neutral bg-neutral rounded-2 color-side-svg">
                         <Link to='/admin' className="p-1 px-sm-3 py-sm-2">
                             <RiAdminLine fontSize="22px" />
-                            <span className="me-2 d-none d-sm-inline color-side-text">پنل ادمین</span>
+                            <span className="me-2 d-none d-sm-inline color-side-text fw-light">پنل ادمین</span>
                         </Link>
                     </Button>
                 )}
                 {refreshToken && !isError ? (
                     <Button onClick={signOutHandler} className="bg-transparent p-1 px-sm-3 py-sm-2 border-neutral rounded-2">
                         <BiLogOutCircle fontSize="22px" />
-                        <span className="me-2 d-none d-sm-inline">خروج</span>
+                        <span className="me-2 d-none d-sm-inline fw-light">خروج</span>
                     </Button>
                 ) : (
                     <Button className="bg-transparent p-0 border-neutral rounded-2">
                         <Link to='/auth' className="p-1 px-sm-3 py-sm-2">
                             <BiLogInCircle fontSize="22px" />
-                            <span className="me-2 d-none d-sm-inline">ورود</span>
+                            <span className="me-2 d-none d-sm-inline fw-light">ورود</span>
                         </Link>
                     </Button>
                 )}
-                <Button className={`${styles.sign} bg-transparent p-0 border-link bg-link rounded-2`}>
+                <Button className="bg-transparent p-0 border-link bg-link rounded-2 color-side-svg">
                     <Link to='/dashboard' className="p-1 px-sm-3 py-sm-2">
                         <TiPlusOutline fontSize="22px" />
-                        <span className="me-2 d-none d-sm-inline color-side-text">ثبت آگهی</span>
+                        <span className="me-2 d-none d-sm-inline color-side-text fw-light">ثبت آگهی</span>
                     </Link>
                 </Button>
             </div>

@@ -7,14 +7,6 @@
     width: 50px;
 }
 
-.header button span {
-    font-weight: 300;
-}
-
-.sign path {
-    color: var(--color-side-text) !important;
-}
-
 @media (min-width: 768px) {
     .headerLogo {
         width: 80px;
