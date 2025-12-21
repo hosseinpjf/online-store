@@ -1,14 +1,15 @@
 import Header from "layouts/Header"
 import Footer from "layouts/Footer"
+import { useState } from "react"
 
-function Layout({children}) {
+function Layout({ children, setShowOffcanvas }) {
   return (
     <>
-        <Header />
-        <main style={{minHeight: '100dvh'}}>
-            {children}
-        </main>
-        <Footer />
+      <Header setShowOffcanvas={setShowOffcanvas} />
+      <main style={{ minHeight: '100dvh' }}>
+        {children}
+      </main>
+      <Footer />
     </>
   )
 }

@@ -12,11 +12,13 @@ import Router from "router/Router";
 const queryClient = new QueryClient(reactQueryOptions);
 
 function App() {
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Layout>
-          <Router />
+        <Layout setShowOffcanvas={setShowOffcanvas}>
+          <Router showOffcanvas={showOffcanvas} />
           <Toaster />
         </Layout>
       </BrowserRouter>

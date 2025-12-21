@@ -116,9 +116,9 @@ button {
   transition: transform .2s ease-in-out;
 }
 
-button:active {
+/* button:active {
   transform: scale(.99);
-}
+} */
 
 button:disabled {
   opacity: 0.5;
@@ -201,6 +201,10 @@ input {
   color: var(--color-main-text) !important;
 }
 
+.color-side-text {
+  color: var(--color-side-text) !important;
+}
+
 .color-success {
   color: var(--color-success) !important;
 }
@@ -218,8 +222,16 @@ input {
   transition: color .1s ease;
 }
 
-.border-color {
+.border-surface {
   border-color: var(--border-color) !important;
+}
+
+.border-neutral {
+  border-color: var(--color-neutral) !important;
+}
+
+.border-link {
+  border-color: var(--color-link) !important;
 }
 
 .image-fit {
