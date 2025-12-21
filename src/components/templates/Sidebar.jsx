@@ -42,7 +42,7 @@ function Sidebar({ categories, setSearchParams, searchParams }) {
                             action
                             active={!categoryParams}
                             onClick={removeUrlQuery}
-                            className={`bg-transparent border-0 border-bottom py-2 my-1 border-neutral single-line rounded-0 color-neutral`}
+                            className={`bg-transparent border-0 border-bottom py-2 my-1 border-color single-line rounded-0 color-neutral`}
                         >همه
                         </ListGroup.Item>
                         {categories?.map(category => (
@@ -52,7 +52,7 @@ function Sidebar({ categories, setSearchParams, searchParams }) {
                                 active={categoryParams == category.slug}
                                 onClick={() => addUrlQuery(category.slug)}
                                 title={category.name}
-                                className={` bg-transparent border-0 border-bottom py-2 my-1 border-neutral single-line rounded-0 color-neutral`}
+                                className={` bg-transparent border-0 border-bottom py-2 my-1 border-color single-line rounded-0 color-neutral`}
                             >{category.name}
                             </ListGroup.Item>
                         ))}
