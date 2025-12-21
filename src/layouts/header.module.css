@@ -19,3 +19,9 @@
         width: 80px;
     }
 }
+
+@media (min-width: 1200px) {
+    .header{
+        z-index: 1050;
+    }
+}
