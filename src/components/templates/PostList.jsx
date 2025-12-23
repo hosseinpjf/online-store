@@ -6,7 +6,7 @@ import { RiDeleteBin7Line } from "react-icons/ri";
 
 import { deletePost, getUserPosts } from "services/user";
 
-import PostCard from "./PostCard";
+import PostCard from "components/modules/PostCard";
 import Loader from "components/modules/Loader";
 
 function PostList() {

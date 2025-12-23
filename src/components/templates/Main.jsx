@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import PostCard from "components/templates/PostCard";
+import PostCard from "components/modules/PostCard";
 
 function Main({ posts, searchParams, categories }) {
     const [displayed, setDisplayed] = useState([]);
