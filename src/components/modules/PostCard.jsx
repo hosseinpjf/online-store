@@ -7,7 +7,7 @@ function PostCard({ post }) {
     return (
         <Link to={`/post/${post._id}`} onClick={() => window.scrollTo(0, 0)} className={styles.parent}>
             <Card className="bg-surface border-color w-100">
-                <Ratio aspectRatio={2 / 3} className="overflow-hidden">
+                <Ratio aspectRatio="16x9" className="overflow-hidden">
                     <Card.Img
                         variant="top"
                         className="image-fit"

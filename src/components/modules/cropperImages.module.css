@@ -1,0 +1,6 @@
+:global(.cropper-wrap-box),
+:global(.cropper-crop-box),
+:global(.cropper-view-box),
+:global(.cropper-canvas) {
+    direction: ltr !important;
+}

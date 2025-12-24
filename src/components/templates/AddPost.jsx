@@ -5,11 +5,15 @@ import toast from 'react-hot-toast';
 import { getCategory } from 'services/admin'
 import { addPost } from 'services/user';
 
+import CropperImages from 'components/modules/CropperImages';
+
 import styles from './addPost.module.css'
 
 function AddPost() {
     const queryClient = useQueryClient();
-    const [form, setForm] = useState({ title: "", content: "", amount: null, city: "", category: "", images: null });
+    const [form, setForm] = useState({ title: "", content: "", amount: null, city: "", category: "", images: [] });
+
+    // console.log(form.images);
 
     const { data } = useQuery({
         queryKey: ['list-category'],
@@ -33,13 +37,19 @@ function AddPost() {
             setForm({ ...form, [event.target.name]: event.target.value });
         }
         else {
-            setForm({ ...form, [event.target.name]: [...event.target.files] });
+            setForm({ ...form, [event.target.name]: [...event.target.files].map(fileImage => ({ fileImage, edited: false })) });
         }
     }
 
     const addHandler = async event => {
         event.preventDefault();
         if (!form.amount || !form.category) return;
+
+        let validate = form.images?.every(image => image.edited);
+        if (!validate) {
+            toast.error("همه‌ی عکس‌ها باید ویرایش شده باشند", { id: 'imagesValidate' });
+            return
+        }
 
         const formData = new FormData();
         for (const item in form) {
@@ -48,7 +58,7 @@ function AddPost() {
             }
             else {
                 form[item]?.forEach(image => {
-                    formData.append(item, image);
+                    formData.append(item, image.fileImage);
                 })
             }
         }
@@ -83,6 +93,9 @@ function AddPost() {
             <div>
                 <label htmlFor="images">عکس</label>
                 <input type="file" name="images" id="images" accept="image/*" multiple />
+            </div>
+            <div style={{width: '100%'}}>
+                <CropperImages formImages={form.images} setFormImages={setForm} />
             </div>
             <button type='submit' onClick={addHandler} disabled={isPending}>ایجاد</button>
         </form>
