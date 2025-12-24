@@ -37,7 +37,7 @@ function PostList() {
     }
 
     return (
-        <div>
+        <div className="mt-4">
             <h3>آگهی های شما</h3>
             {isLoading ? <Loader /> : (
                 <div className="d-flex flex-wrap gap-2 gap-sm-3 gap-lg-4 gap-xxl-5 justify-content-center justify-content-md-evenly">

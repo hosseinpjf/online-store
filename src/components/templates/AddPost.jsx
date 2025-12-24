@@ -120,11 +120,11 @@ function AddPost() {
                         )}
                     </label>
                 </div>
-                <Button type='submit' onClick={addHandler} disabled={isPending} className='w-100 bg-surface color-accent border-2 py-2 rounded-2 border-accent'>ایجاد</Button>
             </div>
             <div style={{ width: '100%' }}>
                 <CropperImages formImages={form.images} setFormImages={setForm} />
             </div>
+            <Button type='submit' onClick={addHandler} disabled={isPending} className='w-100 bg-surface color-accent border-2 py-2 rounded-2 border-accent mt-3'>ایجاد</Button>
         </form>
     )
 }

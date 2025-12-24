@@ -203,6 +203,10 @@ button:disabled {
   color: var(--color-success) !important;
 }
 
+.color-error {
+  color: var(--color-error) !important;
+}
+
 .color-accent {
   color: var(--color-accent) !important;
 }
@@ -230,6 +234,14 @@ button:disabled {
 
 .border-accent {
   border-color: var(--color-accent) !important;
+}
+
+.border-success {
+  border-color: var(--color-success) !important;
+}
+
+.border-error {
+  border-color: var(--color-error) !important;
 }
 
 .image-fit {
