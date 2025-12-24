@@ -1,0 +1,67 @@
+.form-floating>label {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    left: auto !important;
+    right: 15px !important;
+    transition: font-size .1s ease-in-out, opacity .1s ease-in-out, transform .1s ease-in-out !important;
+    color: var(--color-secondary) !important;
+}
+
+.form-floating>.form-control-plaintext~label,
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label,
+.form-floating>.form-select~label {
+    transform: scale(1) translateY(-0.8rem) translateX(0rem) !important;
+    font-size: 14px;
+    opacity: .8;
+}
+
+.form-floating>label::after {
+    background-color: transparent !important;
+}
+
+input,
+textarea,
+select {
+    box-shadow: none !important;
+    color: var(--color-main-text) !important;
+}
+
+textarea::-webkit-scrollbar {
+    display: none;
+}
+
+select {
+    background-position: 10px center !important;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+form input,
+form textarea, 
+form select,
+form label{
+    height: 60px !important;
+}
+
+.inputFile {
+    max-width: 100%;
+}
+
+.inputFile label {
+    padding-top: 1.625rem;
+}
+
+.inputFile label > span:first-of-type {
+    color: var(--color-secondary) !important;
+    font-size: 14px;
+    opacity: .8;
+}

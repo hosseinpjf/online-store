@@ -54,7 +54,7 @@ function CropperImages({ formImages, setFormImages }) {
 
     return (
         <div className="w-100">
-            <div className="d-flex gap-2 justify-content-start align-items-center w-100 overflow-auto p-1 border border-2 border-black" style={{height: '130px'}}>
+            <div className="d-flex gap-2 justify-content-start align-items-center w-100 overflow-auto p-1 border border-2 border-black" style={{height: '145px'}}>
                 {formImages.map(image => (
                     <Ratio
                         onClick={() => cutHandler(image.fileImage.name)}

@@ -124,12 +124,6 @@ button:disabled {
   opacity: 0.5;
 }
 
-input {
-  box-shadow: none !important;
-  color: var(--color-main-text) !important;
-  font-weight: 100;
-}
-
 ::placeholder {
   color: var(--border-color) !important;
 }
@@ -234,6 +228,10 @@ input {
   border-color: var(--color-link) !important;
 }
 
+.border-accent {
+  border-color: var(--color-accent) !important;
+}
+
 .image-fit {
   width: 100%;
   height: 100%;
@@ -251,7 +249,11 @@ input {
 }
 
 .color-side-svg path {
-    color: var(--color-side-text) !important;
+  color: var(--color-side-text) !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 /* ---------------------------< Global Classes >--------------------------- */
@@ -263,6 +265,6 @@ input {
 
 .offcanvas-body .list-group-item.active {
   border-right: 2px solid var(--color-accent) !important;
-  color: var(--color-main-text)  !important;
+  color: var(--color-main-text) !important;
   background-color: var(--hover-smooth) !important;
 }
