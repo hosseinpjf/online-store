@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom'
 import toast from 'react-hot-toast';
@@ -19,12 +19,16 @@ function PostPage() {
 
     const { data, isLoading } = useQuery({
         queryKey: ['post', params.id],
-        queryFn: getPost
+        queryFn: getPost,
+        select: data => {
+            const newImages = [data.post.images[data.post.options.mainPhoto], ...data.post.images.filter((img) => img != data.post.images[data.post.options.mainPhoto])];
+            return { ...data.post, images: newImages }
+        }
     });
 
     const { data: profile } = useQuery({
         queryKey: ['profile'],
-        queryFn: getProfile
+        queryFn: getProfile,
     })
 
     const { mutate } = useMutation({
@@ -45,7 +49,7 @@ function PostPage() {
     return (
         <div className="py-4 px-2 px-sm-3 px-md-4 py-md-5">
             <div className='d-flex justify-content-between align-items-start gap-1 gap-sm-3 w-100 mb-3'>
-                <h4 className='m-0 pt-2 lh-base'>{data.post.options.title}</h4>
+                <h4 className='m-0 pt-2 lh-base'>{data.options.title}</h4>
                 <Button onClick={() => navigate(-1)} className='bg-transparent border-0'>
                     <IoMdArrowRoundBack size="22px" />
                 </Button>
@@ -53,9 +57,9 @@ function PostPage() {
             <div className={`${styles.main} d-flex flex-column flex-md-row-reverse row-gap-3 column-gap-5`}>
                 <div>
                     <div className={`${styles.parentCarousel} mx-auto`}>
-                        {!!data.post.images.length ? (
+                        {!!data.images.length ? (
                             <Carousel activeIndex={index} onSelect={selectedIndex => setIndex(selectedIndex)}>
-                                {data.post.images.map(image => (
+                                {data.images.map(image => (
                                     <Carousel.Item key={image}>
                                         <Ratio aspectRatio="16x9" className='w-100'>
                                             <img
@@ -73,21 +77,21 @@ function PostPage() {
                             </Ratio>
                         )}
                         <div className='mt-4'>
-                            <p className='mb-2'>منطقه : {data.post.options.city || "ثبت نشده"}</p>
-                            <p className='mb-2'>شماره تلفن جهت تماس : {data.post.userMobile}</p>
-                            <p className='mb-0'>ارسال شده در تاریخ : {new Date(data.post.createdAt).toLocaleDateString("fa-IR")}</p>
+                            <p className='mb-2'>منطقه : {data.options.city || "ثبت نشده"}</p>
+                            <p className='mb-2'>شماره تلفن جهت تماس : {data.userMobile}</p>
+                            <p className='mb-0'>ارسال شده در تاریخ : {new Date(data.createdAt).toLocaleDateString("fa-IR")}</p>
                         </div>
                     </div>
                 </div>
 
-                <div className={`${!data.post.options.content ? 'align-self-center' : null} mt-1 mt-md-0`}>
-                    {data.post.options.content ? <p className='lh-lg'>{data.post.options.content}</p> : <p className='text-center color-error'>برای این پست متن توضیحاتی ثبت نشده</p>}
+                <div className={`${!data.options.content ? 'align-self-center' : null} mt-1 mt-md-0`}>
+                    {data.options.content ? <p className='lh-lg'>{data.options.content}</p> : <p className='text-center color-error'>برای این پست متن توضیحاتی ثبت نشده</p>}
                 </div>
             </div>
 
             {profile?.role == 'ADMIN' && (
                 <div className={`${styles.deletePost} position-sticky d-flex justify-content-end`}>
-                    <Button className='bg-error border-0' onClick={() => mutate(data.post._id)}>حذف پست</Button>
+                    <Button className='bg-error border-0' onClick={() => mutate(data._id)}>حذف پست</Button>
                 </div>
             )}
         </div>

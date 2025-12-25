@@ -74,3 +74,17 @@
         flex: 0 0 50px !important;
     }
 }
+
+.preview {
+    height: 145px;
+    scroll-behavior: smooth;
+}
+
+.previewImage {
+    flex: 0 0 200px
+}
+
+.previewImage input{
+    width: 15px !important;
+    height: 15px !important;
+}

@@ -11,7 +11,7 @@ function PostCard({ post }) {
                     <Card.Img
                         variant="top"
                         className="image-fit"
-                        src={`${import.meta.env.VITE_BASE_URL}/${post.images[0]}`}
+                        src={`${import.meta.env.VITE_BASE_URL}/${post.images[post.options.mainPhoto]}`}
                         onError={e => e.target.src = 'not-found.png'}
                     />
                 </Ratio>

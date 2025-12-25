@@ -12,7 +12,7 @@ import 'styles/form.css'
 
 function AddPost() {
     const queryClient = useQueryClient();
-    const [form, setForm] = useState({ title: "", content: "", amount: null, city: "", category: "", images: [] });
+    const [form, setForm] = useState({ title: "", content: "", amount: null, city: "", category: "", images: [], mainPhoto: 0 });
     const [accordionKey, setAccordionKey] = useState(null)
 
     const { data } = useQuery({
@@ -37,7 +37,7 @@ function AddPost() {
             setForm({ ...form, [event.target.name]: event.target.value });
         }
         else {
-            setForm({ ...form, [event.target.name]: [...event.target.files].map(fileImage => ({ fileImage, edited: false })) });
+            setForm({ ...form, [event.target.name]: [...event.target.files].map((fileImage, index) => ({ fileImage, edited: false, firstImage: index == 0 ? true : false })) });
         }
     }
 
@@ -68,7 +68,7 @@ function AddPost() {
 
         mutate(formData);
         setAccordionKey(null);
-        setForm({ title: "", content: "", amount: null, city: "", category: "", images: [] })
+        setForm({ title: "", content: "", amount: null, city: "", category: "", images: [], mainPhoto: 0 })
     }
 
     return (
@@ -128,7 +128,7 @@ function AddPost() {
                 </div>
             </div>
             <div style={{ width: '100%' }}>
-                <CropperImages formImages={form.images} setFormImages={setForm} accordionKey={accordionKey} setAccordionKey={setAccordionKey} />
+                <CropperImages form={form} setForm={setForm} accordionKey={accordionKey} setAccordionKey={setAccordionKey} />
             </div>
             <Button type='submit' onClick={addHandler} disabled={isPending} className='w-100 bg-surface color-accent border-2 py-2 rounded-2 border-accent mt-2 mt-md-3 mt-xl-4'>ایجاد</Button>
         </form>

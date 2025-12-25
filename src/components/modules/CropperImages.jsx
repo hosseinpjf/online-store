@@ -12,7 +12,7 @@ import { GrStatusGood } from "react-icons/gr";
 
 import styles from "./cropperImages.module.css"
 
-function CropperImages({ formImages, setFormImages, accordionKey, setAccordionKey }) {
+function CropperImages({ form, setForm, accordionKey, setAccordionKey }) {
     const cropperRef = useRef(null);
     const [images, setImages] = useState({
         AllImages: [],
@@ -20,16 +20,16 @@ function CropperImages({ formImages, setFormImages, accordionKey, setAccordionKe
     });
 
     useEffect(() => {
-        if (!!formImages.length) {
+        if (!!form.images.length) {
             setAccordionKey("0");
         }
         else {
             setAccordionKey(null);
         }
 
-        if (images.AllImages?.length != 0 && images.AllImages?.every((val, i) => val.fileImage.name === formImages[i]?.fileImage.name)) return
-        setImages({ AllImages: [...formImages], aloneImage: formImages[0] });
-    }, [formImages])
+        if (images.AllImages?.length != 0 && images.AllImages?.every((val, i) => val.fileImage.name === form.images[i]?.fileImage.name)) return
+        setImages({ AllImages: [...form.images], aloneImage: form.images[0] });
+    }, [form.images])
 
     const handleCrop = () => {
         const cropper = cropperRef.current?.cropper;
@@ -38,8 +38,8 @@ function CropperImages({ formImages, setFormImages, accordionKey, setAccordionKe
             cropper.getCroppedCanvas().toBlob((blob) => {
                 if (blob) {
                     const fileImage = new File([blob], originalName, { type: blob.type });
-                    const pictures = [...formImages.map(formImage => formImage.fileImage.name == fileImage.name ? { fileImage, edited: true } : formImage)];
-                    setFormImages(prevForm => ({ ...prevForm, images: [...pictures] }));
+                    const pictures = [...form.images.map(formImage => formImage.fileImage.name == fileImage.name ? ({ ...formImage, fileImage, edited: true }) : formImage)];
+                    setForm(prevForm => ({ ...prevForm, images: [...pictures] }));
                 }
             }, images.aloneImage.type, .9);
         }
@@ -66,21 +66,28 @@ function CropperImages({ formImages, setFormImages, accordionKey, setAccordionKe
                         <>
                             <div className={`${styles.scrollBar} position-relative mb-3`}>
                                 <Button onClick={e => e.target.parentElement.children[1].scrollLeft -= 250} className="position-absolute top-50 start-0 translate-middle-y z-1 bg-secondary border-0 rounded-circle fs-5 opacity-50 p-0 ms-2" type="button">»</Button>
-                                <div className="d-flex gap-2 justify-content-start align-items-center w-100 overflow-auto p-1" style={{ height: '145px', scrollBehavior: 'smooth' }}>
-                                    {formImages.map(image => (
-                                        <Ratio
-                                            onClick={() => cutHandler(image.fileImage.name)}
-                                            aspectRatio="16x9"
-                                            key={image.fileImage.name}
-                                            className={`${image.edited ? 'border border-3 border-success' : 'border border-3 border-error'} rounded-2`}
-                                            style={{ flex: '0 0 200px', cursor: 'pointer' }}
-                                        >
-                                            <img
-                                                className="h-100 w-100 p-1 rounded-3"
-                                                src={URL.createObjectURL(image.fileImage)}
-                                                alt=""
+                                <div className={`${styles.preview} d-flex gap-2 justify-content-start align-items-center w-100 overflow-auto p-1`}>
+                                    {form.images.map((image, index) => (
+                                        <div className={`${styles.previewImage} position-relative h-100`} key={image.fileImage.name}>
+                                            <Ratio
+                                                onClick={() => cutHandler(image.fileImage.name)}
+                                                aspectRatio="16x9"
+                                                className={`${image.edited ? 'border border-3 border-success' : 'border border-3 border-error'} rounded-2 cursor-pointer w-100`}
+                                            >
+                                                <img
+                                                    className="h-100 w-100 p-1 rounded-3"
+                                                    src={URL.createObjectURL(image.fileImage)}
+                                                    alt=""
+                                                />
+                                            </Ratio>
+                                            <input
+                                                type="radio"
+                                                name="selectImage"
+                                                checked={index == form.mainPhoto}
+                                                onChange={() => setForm(prevForm => ({ ...prevForm, mainPhoto: index }))}
+                                                className="position-absolute z-1 top-0 end-0 m-2 cursor-pointer"
                                             />
-                                        </Ratio>
+                                        </div>
                                     ))}
                                 </div>
                                 <Button onClick={e => e.target.parentElement.children[1].scrollLeft += 250} className="position-absolute top-50 end-0 translate-middle-y z-1 bg-secondary border-0 rounded-circle fs-5 opacity-50 p-0 me-2" type="button">«</Button>
