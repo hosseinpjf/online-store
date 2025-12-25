@@ -10,3 +10,15 @@
 .sidebarBody::-webkit-scrollbar{
     display: none;
 }
+
+.sidebarBody button:first-of-type::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-main-text);
+    transform: translateY(-50%);
+}

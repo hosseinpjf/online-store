@@ -3,7 +3,7 @@ import PostList from "components/templates/PostList"
 
 function DashboardPage() {
   return (
-    <div>
+    <div className="py-4 px-1 px-sm-3 py-md-5">
       <AddPost />
       <PostList />
     </div>

@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast";
 
 import { deleteCategory, getCategory } from "services/admin"
+import icons from "constants/icons";
 
 import Loader from "components/modules/Loader";
 
@@ -37,6 +38,11 @@ function CategoryList() {
         mutate(id);
     }
 
+    const categoryIcon = (name) => {
+        const Icon = icons[name];
+        return Icon ? <Icon size="20px" /> : null
+    }
+
     return (
         <div className={styles.list}>
             <h3 className="mb-4">دسته بندی ها</h3>
@@ -44,6 +50,7 @@ function CategoryList() {
                 <ul className="p-0 d-flex gap-3 flex-wrap">
                     {data?.map(item => (
                         <li key={item._id} className="flex-grow-1 bg-surface border border-2 border-disabled d-flex align-items-center justify-content-between gap-2 p-3">
+                            {categoryIcon(item.icon)}
                             <span className="ms-auto">{item.name}</span>
                             <span className="color-secondary">slug: {item.slug}</span>
                             <Button

@@ -1,0 +1,6 @@
+import { FaTshirt, FaFemale, FaShoePrints, FaShoppingBag, FaClock, FaGem, FaMobileAlt, FaLaptop, FaTabletAlt, FaHeadphones, FaCamera, FaGamepad, FaBook, FaPenFancy, FaMusic, FaFilm, FaBlender, FaMugHot, FaCouch, FaPaintRoller, FaLightbulb, FaTools, FaHammer, FaCar, FaMotorcycle, FaBicycle, FaCogs, FaDumbbell, FaCampground, FaPuzzlePiece, FaChess, FaBaby, FaBabyCarriage, FaAppleAlt, FaWineBottle, FaCookieBite, FaLeaf, FaSpa, FaPalette, FaPumpSoap, FaCapsules, FaDog, FaBone, FaSeedling, FaHandsHelping, FaGraduationCap, FaPlane, FaTicketAlt, FaPaintBrush, FaStore } from "react-icons/fa";
+
+const icons = { FaTshirt, FaFemale, FaShoePrints, FaShoppingBag, FaClock, FaGem, FaMobileAlt, FaLaptop, FaTabletAlt, FaHeadphones, FaCamera, FaGamepad, FaBook, FaPenFancy, FaMusic, FaFilm, FaBlender, FaMugHot, FaCouch, FaPaintRoller, FaLightbulb, FaTools, FaHammer, FaCar, FaMotorcycle, FaBicycle, FaCogs, FaDumbbell, FaCampground, FaPuzzlePiece, FaChess, FaBaby, FaBabyCarriage, FaAppleAlt, FaWineBottle, FaCookieBite, FaLeaf, FaSpa, FaPalette, FaPumpSoap, FaCapsules, FaDog, FaBone, FaSeedling, FaHandsHelping, FaGraduationCap, FaPlane, FaTicketAlt, FaPaintBrush, FaStore };
+
+
+export default icons

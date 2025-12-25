@@ -14,17 +14,17 @@
     background-image: var(--bs-accordion-btn-icon) !important;
 }
 
-:global(.accordion-button) {
-    background-color: transparent !important;
-    box-shadow: none !important;
-    height: 60px !important;
-    color: var(--color-main-text) !important;
-}
-
 :global(.cropper-point) {
     width: 6px !important;
     height: 6px !important;
     background-color: var(--color-link) !important;
+}
+
+:global(.accordion-button) {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    height: 60px !important;
+    color: inherit !important;
 }
 
 .scrollBar button {

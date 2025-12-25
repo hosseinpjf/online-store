@@ -2,6 +2,7 @@ import useStore from "store/store";
 import { Button, ListGroup, Offcanvas } from "react-bootstrap";
 import { IoClose } from "react-icons/io5";
 
+import icons from "constants/icons";
 
 import styles from "./sidebar.module.css"
 
@@ -19,6 +20,11 @@ function Sidebar({ categories, setSearchParams, searchParams }) {
         newParams.delete('category');
         setSearchParams(newParams);
         setShowOffcanvas(false);
+    }
+
+    const categoryIcon = name => {
+        const Icon = icons[name];
+        return Icon ? <Icon size="18px" /> : null
     }
 
     return (
@@ -42,7 +48,7 @@ function Sidebar({ categories, setSearchParams, searchParams }) {
                             action
                             active={!categoryParams}
                             onClick={removeUrlQuery}
-                            className={`bg-transparent border-0 border-bottom py-2 my-1 border-color single-line rounded-0 color-neutral`}
+                            className="pe-5 bg-transparent border-0 border-bottom py-2 my-1 border-color single-line rounded-0 color-neutral position-relative"
                         >همه
                         </ListGroup.Item>
                         {categories?.map(category => (
@@ -52,8 +58,10 @@ function Sidebar({ categories, setSearchParams, searchParams }) {
                                 active={categoryParams == category.slug}
                                 onClick={() => addUrlQuery(category.slug)}
                                 title={category.name}
-                                className={` bg-transparent border-0 border-bottom py-2 my-1 border-color single-line rounded-0 color-neutral`}
-                            >{category.name}
+                                className="bg-transparent border-0 border-bottom py-2 my-1 border-color single-line rounded-0 color-neutral d-flex align-items-center justify-content-start gap-3"
+                            >
+                                {categoryIcon(category.icon)}
+                                {category.name}
                             </ListGroup.Item>
                         ))}
                     </ListGroup>

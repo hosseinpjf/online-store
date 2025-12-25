@@ -60,7 +60,7 @@ function CropperImages({ formImages, setFormImages, accordionKey, setAccordionKe
     return (
         <Accordion activeKey={accordionKey} onSelect={key => setAccordionKey(key)}>
             <Accordion.Item className="bg-surface overflow-hidden border-1 border-neutral" eventKey="0">
-                <Accordion.Header className="bg-surface">تنظیمات عکس</Accordion.Header>
+                <Accordion.Header className="color-secondary">تنظیمات عکس</Accordion.Header>
                 <Accordion.Body className="w-100 pt-0 px-2 px-sm-3">
                     {!!images.AllImages.length ? (
                         <>
