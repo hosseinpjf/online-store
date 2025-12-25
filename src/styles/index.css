@@ -275,16 +275,3 @@ button:disabled {
 .cursor-pointer {
   cursor: pointer;
 }
-
-/* ---------------------------< Global Classes >--------------------------- */
-
-.offcanvas-body .list-group-item:hover {
-  background-color: var(--hover-smooth) !important;
-  color: var(--color-neutral);
-}
-
-.offcanvas-body .list-group-item.active {
-  border-right: 2px solid var(--color-accent) !important;
-  color: var(--color-main-text) !important;
-  background-color: var(--hover-smooth) !important;
-}
