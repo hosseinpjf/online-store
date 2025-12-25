@@ -1,0 +1,19 @@
+:global(.carousel),
+:global(.carousel *) {
+    direction: ltr;
+}
+
+.main>div {
+    flex: 1 1 50%;
+}
+
+@media (min-width: 768px) {
+    .parentCarousel {
+        position: sticky;
+        top: 90px;
+    }
+}
+
+.deletePost{
+    bottom: 30px;
+}

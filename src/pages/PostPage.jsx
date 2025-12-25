@@ -1,21 +1,26 @@
+import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom'
 import toast from 'react-hot-toast';
+import { Button, Carousel, Ratio } from 'react-bootstrap';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 import { deletePost, getPost, getProfile } from 'services/user';
 
 import Loader from 'components/modules/Loader';
 
+import styles from './postPage.module.css';
+
 function PostPage() {
     const params = useParams();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
+    const [index, setIndex] = useState(0);
 
     const { data, isLoading } = useQuery({
         queryKey: ['post', params.id],
         queryFn: getPost
     });
-    console.log(data);
 
     const { data: profile } = useQuery({
         queryKey: ['profile'],
@@ -38,27 +43,53 @@ function PostPage() {
 
     if (isLoading) return <Loader />;
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', gap: '20px', minHeight: '70dvh', padding: '40px' }}>
-            <button onClick={() => navigate(-1)}>برگشت</button>
-            {!!data?.post.images.length ?
-                (data.post.images.map(image => (
-                    <img
-                        key={image}
-                        width='200px'
-                        src={`${import.meta.env.VITE_BASE_URL}/${image}`}
-                        alt=""
-                        onError={e => e.target.src = '/not-found.png'}
-                    />
-                ))) : (
-                    <img src='/not-found.png' width='200px' />
-                )
-            }
-            <h4>{data?.post.options.title}</h4>
-            <p>{data?.post.options.content}</p>
-            <p>{data?.post.options.city}</p>
-            <p>{data?.post.userMobile} شماره تلفن جهت تماس</p>
+        <div className="py-4 px-2 px-sm-3 px-md-4 py-md-5">
+            <div className='d-flex justify-content-between align-items-start gap-1 gap-sm-3 w-100 mb-3'>
+                <h4 className='m-0 pt-2 lh-base'>{data.post.options.title}</h4>
+                <Button onClick={() => navigate(-1)} className='bg-transparent border-0'>
+                    <IoMdArrowRoundBack size="22px" />
+                </Button>
+            </div>
+            <div className={`${styles.main} d-flex flex-column flex-md-row-reverse row-gap-3 column-gap-5`}>
+                <div>
+                    <div className={`${styles.parentCarousel} mx-auto`}>
+                        {!!data.post.images.length ? (
+                            <Carousel activeIndex={index} onSelect={selectedIndex => setIndex(selectedIndex)}>
+                                {data.post.images.map(image => (
+                                    <Carousel.Item key={image}>
+                                        <Ratio aspectRatio="16x9" className='w-100'>
+                                            <img
+                                                className='image-fit rounded-3'
+                                                src={`${import.meta.env.VITE_BASE_URL}/${image}`}
+                                                onError={e => e.target.src = '/not-found.png'}
+                                            />
+                                        </Ratio>
+                                    </Carousel.Item>
+                                ))}
+                            </Carousel>
+                        ) : (
+                            <Ratio aspectRatio="16x9" className='w-100'>
+                                <img src='/not-found.png' className='image-fit rounded-3' />
+                            </Ratio>
+                        )}
+                        <div className='mt-4'>
+                            <p className='mb-2'>منطقه : {data.post.options.city || "ثبت نشده"}</p>
+                            <p className='mb-2'>شماره تلفن جهت تماس : {data.post.userMobile}</p>
+                            <p className='mb-0'>ارسال شده در تاریخ : {new Date(data.post.createdAt).toLocaleDateString("fa-IR")}</p>
+                        </div>
+                    </div>
+                </div>
 
-            {profile?.role == 'ADMIN' && <button onClick={() => mutate(data.post._id)}>حذف پست</button>}
+                <div className={`${!data.post.options.content ? 'align-self-center' : null} mt-1 mt-md-0`}>
+                    {data.post.options.content ? <p className='lh-lg'>{data.post.options.content}</p> : <p className='text-center color-error'>برای این پست متن توضیحاتی ثبت نشده</p>}
+                </div>
+            </div>
+
+            {profile?.role == 'ADMIN' && (
+                <div className={`${styles.deletePost} position-sticky d-flex justify-content-end`}>
+                    <Button className='bg-error border-0' onClick={() => mutate(data.post._id)}>حذف پست</Button>
+                </div>
+            )}
         </div>
     )
 }
