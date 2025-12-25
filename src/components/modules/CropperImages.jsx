@@ -12,13 +12,12 @@ import { GrStatusGood } from "react-icons/gr";
 
 import styles from "./cropperImages.module.css"
 
-function CropperImages({ formImages, setFormImages }) {
+function CropperImages({ formImages, setFormImages, accordionKey, setAccordionKey }) {
     const cropperRef = useRef(null);
     const [images, setImages] = useState({
         AllImages: [],
         aloneImage: null
     });
-    const [accordionKey, setAccordionKey] = useState(null)
 
     useEffect(() => {
         if (!!formImages.length) {
@@ -33,7 +32,6 @@ function CropperImages({ formImages, setFormImages }) {
     }, [formImages])
 
     const handleCrop = () => {
-        console.log("rendered");
         const cropper = cropperRef.current?.cropper;
         if (cropper) {
             const originalName = images.aloneImage.fileImage.name;
@@ -48,7 +46,6 @@ function CropperImages({ formImages, setFormImages }) {
     };
 
     const cutHandler = async name => {
-        console.log("rendered");
         if (name) {
             const showImage = images.AllImages.find(image => image.fileImage.name == name);
             setImages({ ...images, aloneImage: showImage })
@@ -59,8 +56,6 @@ function CropperImages({ formImages, setFormImages }) {
             setImages({ ...images, aloneImage: (images.AllImages[showImage + 1]) || (images.AllImages[0]) });
         }
     }
-
-    console.log({ images, formImages });
 
     return (
         <Accordion activeKey={accordionKey} onSelect={key => setAccordionKey(key)}>
@@ -134,7 +129,7 @@ function CropperImages({ formImages, setFormImages }) {
     )
 }
 
-export default memo(CropperImages)
+export default CropperImages
 
 const CropperSection = memo(({ aloneImage, cropperRef }) => {
     return (

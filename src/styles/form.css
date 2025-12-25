@@ -65,3 +65,7 @@ form label{
     font-size: 14px;
     opacity: .8;
 }
+
+form>div:first-of-type div {
+    flex-basis: 200px;
+}

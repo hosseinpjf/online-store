@@ -18,7 +18,7 @@
   /* رنگ موفقیت */
   --color-success: #28a745;
   /* رنگ خطا */
-  --color-error: #dc3545;
+  --color-error: #90101c;
   /* رنگ هشدار */
   --color-warning: #ffc107;
   /* رنگ لینک */
@@ -215,6 +215,10 @@ button:disabled {
   color: var(--color-secondary) !important;
 }
 
+.color-link{
+  color: var(--color-link) !important;
+}
+
 .color-hover-smooth:hover {
   color: var(--hover-smooth) !important;
   transition: color .1s ease;
@@ -242,6 +246,10 @@ button:disabled {
 
 .border-error {
   border-color: var(--color-error) !important;
+}
+
+.border-disabled{
+  border-color: var(--color-disabled) !important;
 }
 
 .image-fit {

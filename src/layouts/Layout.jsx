@@ -5,7 +5,7 @@ function Layout({ children }) {
   return (
     <>
       <Header />
-      <main style={{ minHeight: '100dvh' }}>
+      <main className="py-4 px-1 px-sm-3 py-md-5" style={{ minHeight: '100dvh' }}>
         {children}
       </main>
       <Footer />

@@ -21,6 +21,12 @@
     color: var(--color-main-text) !important;
 }
 
+:global(.cropper-point) {
+    width: 6px !important;
+    height: 6px !important;
+    background-color: var(--color-link) !important;
+}
+
 .scrollBar button {
     width: 35px;
     height: 35px;
@@ -54,7 +60,7 @@
 }
 
 @media (min-width: 576px) {
-    .boxCropper>div:last-child button:last-child{
+    .boxCropper>div:last-child button:last-child {
         width: auto !important;
     }
 }

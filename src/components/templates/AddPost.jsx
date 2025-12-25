@@ -9,11 +9,11 @@ import { addPost } from 'services/user';
 import CropperImages from 'components/modules/CropperImages';
 
 import 'styles/form.css'
-import styles from './addPost.module.css'
 
 function AddPost() {
     const queryClient = useQueryClient();
     const [form, setForm] = useState({ title: "", content: "", amount: null, city: "", category: "", images: [] });
+    const [accordionKey, setAccordionKey] = useState(null)
 
     const { data } = useQuery({
         queryKey: ['list-category'],
@@ -43,7 +43,10 @@ function AddPost() {
 
     const addHandler = async event => {
         event.preventDefault();
-        if (!form.amount || !form.category) return;
+        if (!form.amount || !form.category || !form.title) {
+            toast.error("لطفا فیلد ها را پر کنید", { id: 'CheckFieldsComplete' });
+            return
+        };
 
         let validate = form.images?.every(image => image.edited);
         if (!validate) {
@@ -64,18 +67,20 @@ function AddPost() {
         }
 
         mutate(formData);
+        setAccordionKey(null);
+        setForm({ title: "", content: "", amount: null, city: "", category: "", images: [] })
     }
 
     return (
-        <form onChange={changeHandler} className={`${styles.form}`}>
-            <h3>افزودن آگهی</h3>
-            <div className='d-flex flex-wrap gap-3 align-items-stretch my-3'>
+        <form>
+            <h3 className='mb-4'>افزودن پست</h3>
+            <div className='d-flex flex-wrap gap-2 gap-md-3 gap-xl-4 mb-2 mb-md-3 mb-xl-4 align-items-stretch mt-3'>
                 <div className='flex-grow-1 h-100'>
                     <FloatingLabel
                         label="عنوان"
                         className="h-100 px-0"
                     >
-                        <Form.Control className='px-3 bg-surface border-1 border-neutral fw-light' type="text" name='title' placeholder="" />
+                        <Form.Control onChange={changeHandler} value={form.title} className='px-3 bg-surface border-1 border-neutral fw-light' type="text" name='title' placeholder="" />
                     </FloatingLabel>
                 </div>
                 <div className='flex-grow-1 h-100'>
@@ -83,7 +88,7 @@ function AddPost() {
                         label="توضیحات"
                         className="h-100 px-0"
                     >
-                        <Form.Control as="textarea" className='px-3 bg-surface border-1 border-neutral fw-light' type="text" name='content' placeholder="" />
+                        <Form.Control onChange={changeHandler} value={form.content} as="textarea" className='px-3 bg-surface border-1 border-neutral fw-light' type="text" name='content' placeholder="" />
                     </FloatingLabel>
                 </div>
                 <div className='flex-grow-1 h-100'>
@@ -91,7 +96,7 @@ function AddPost() {
                         label="قیمت"
                         className="h-100 px-0"
                     >
-                        <Form.Control className='px-3 bg-surface border-1 border-neutral fw-light' type="number" name='amount' placeholder="" />
+                        <Form.Control onChange={changeHandler} value={form.amount || ""} className='px-3 bg-surface border-1 border-neutral fw-light' type="number" name='amount' placeholder="" />
                     </FloatingLabel>
                 </div>
                 <div className='flex-grow-1 h-100'>
@@ -99,19 +104,20 @@ function AddPost() {
                         label="شهر"
                         className="h-100 px-0"
                     >
-                        <Form.Control className='px-3 bg-surface border-1 border-neutral fw-light' type="text" name='city' placeholder="" />
+                        <Form.Control onChange={changeHandler} value={form.city} className='px-3 bg-surface border-1 border-neutral fw-light' type="text" name='city' placeholder="" />
                     </FloatingLabel>
                 </div>
                 <div className='flex-grow-1 h-100'>
                     <FloatingLabel label="دسته بندی">
-                        <Form.Select name="category" className='px-3 bg-surface cursor-pointer border-1 border-neutral fw-light'>
-                            {data?.map(item => <option key={item._id} value={item._id} className='cursor-pointer fw-light'>{item.name}</option>)}
+                        <Form.Select onChange={changeHandler} value={form.category} name="category" className='px-3 bg-surface cursor-pointer border-1 border-neutral fw-light'>
+                            <option value="" disabled className='bg-disabled color-side-text'>انتخاب کنید</option>
+                            {data?.map(item => <option key={item._id} value={item._id} className='cursor-pointer fw-light bg-surface'>{item.name}</option>)}
                         </Form.Select>
                     </FloatingLabel>
                 </div>
                 <div className="flex-grow-1 inputFile">
                     <label htmlFor="images" className='position-relative d-block bg-surface w-100 px-3 rounded-2 border border-1 border-neutral cursor-pointer'>
-                        <input type="file" id='images' className='d-none' name='images' accept="image/*" multiple placeholder="" />
+                        <input onChange={changeHandler} type="file" id='images' className='d-none' name='images' accept="image/*" multiple placeholder="" />
                         <span className='position-absolute top-0 mt-1'>عکس</span>
                         {!form.images?.length ? <span className='fw-light'>هیچ فایلی انتخاب نشده</span> : (
                             <>
@@ -122,9 +128,9 @@ function AddPost() {
                 </div>
             </div>
             <div style={{ width: '100%' }}>
-                <CropperImages formImages={form.images} setFormImages={setForm} />
+                <CropperImages formImages={form.images} setFormImages={setForm} accordionKey={accordionKey} setAccordionKey={setAccordionKey} />
             </div>
-            <Button type='submit' onClick={addHandler} disabled={isPending} className='w-100 bg-surface color-accent border-2 py-2 rounded-2 border-accent mt-3'>ایجاد</Button>
+            <Button type='submit' onClick={addHandler} disabled={isPending} className='w-100 bg-surface color-accent border-2 py-2 rounded-2 border-accent mt-2 mt-md-3 mt-xl-4'>ایجاد</Button>
         </form>
     )
 }
