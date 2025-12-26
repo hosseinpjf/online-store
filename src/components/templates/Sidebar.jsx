@@ -13,6 +13,7 @@ function Sidebar({ categories, setSearchParams, searchParams }) {
     const addUrlQuery = slug => {
         setSearchParams({ category: slug });
         setShowOffcanvas(false);
+        window.scrollTo(0, 0);
     }
 
     const removeUrlQuery = () => {
@@ -20,6 +21,7 @@ function Sidebar({ categories, setSearchParams, searchParams }) {
         newParams.delete('category');
         setSearchParams(newParams);
         setShowOffcanvas(false);
+        window.scrollTo(0, 0);
     }
 
     const categoryIcon = name => {

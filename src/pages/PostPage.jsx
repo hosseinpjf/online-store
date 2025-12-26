@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom'
 import toast from 'react-hot-toast';
@@ -29,6 +29,7 @@ function PostPage() {
     const { data: profile } = useQuery({
         queryKey: ['profile'],
         queryFn: getProfile,
+        enabled: false
     })
 
     const { mutate } = useMutation({
@@ -78,6 +79,7 @@ function PostPage() {
                         )}
                         <div className='mt-4'>
                             <p className='mb-2'>منطقه : {data.options.city || "ثبت نشده"}</p>
+                            <p className='mb-2'>قیمت : {data.amount.toLocaleString("fa-IR")}</p>
                             <p className='mb-2'>شماره تلفن جهت تماس : {data.userMobile}</p>
                             <p className='mb-0'>ارسال شده در تاریخ : {new Date(data.createdAt).toLocaleDateString("fa-IR")}</p>
                         </div>

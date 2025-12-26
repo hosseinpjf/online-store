@@ -31,7 +31,7 @@ function Main({ posts, searchParams, categories }) {
                     ))}
                 </div>
             ) : (
-                <p>در این دسته بندی هیچ پستی وجود ندارد</p>
+                <p className="text-center mt-5">در این دسته بندی هیچ پستی وجود ندارد</p>
             )}
         </div>
     )
