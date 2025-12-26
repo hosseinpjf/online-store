@@ -1,9 +1,8 @@
+import { useState } from "react";
 import toast from "react-hot-toast";
+import { Button, FloatingLabel, Form } from "react-bootstrap";
 
 import { sendOtp } from "services/auth";
-
-import styles from './sendOtpForm.module.css';
-import { useState } from "react";
 
 function SendOtpForm({ setStep, setMobile, mobile }) {
     const [clicked, setClicked] = useState(false);
@@ -23,14 +22,26 @@ function SendOtpForm({ setStep, setMobile, mobile }) {
     }
 
     return (
-        <form onSubmit={sendHandler} className={styles.form}>
-            <h3>ورود به حساب کاربری</h3>
-            <p>برای استفاده از امکانات دیوار لطفا شماره موبایل خود را وارد کنید. کد تایید به این شماره پیامک خواهد شد</p>
-            <label htmlFor="input">شماره موبایل خود را وارد کنید</label>
-            <input type="text" value={mobile} id='input' onChange={e => setMobile(e.target.value)} placeholder='شماره موبایل' />
-            <button type='submit' disabled={clicked}>
+        <form onSubmit={sendHandler} className="p-3 rounded-4">
+            <h3 className="mb-3">ورود به حساب کاربری</h3>
+            <p className="mb-3 fw-light">برای استفاده از امکانات برنامه لطفا شماره موبایل خود را وارد کنید. کد تایید به این شماره پیامک خواهد شد</p>
+
+            <FloatingLabel
+                label="شماره موبایل خود را وارد کنید"
+                className="mb-3 px-0"
+            >
+                <Form.Control
+                    type="number"
+                    onChange={e => setMobile(e.target.value)}
+                    value={mobile}
+                    className='w-100 px-3 bg-transparent rounded-2 border-1 border-disabled fw-light'
+                    placeholder=""
+                />
+            </FloatingLabel>
+
+            <Button type='submit' className="bg-transparent color-accent border-accent rounded-2" disabled={clicked}>
                 {clicked ? 'درحال ارسال...' : 'ارسال کد تایید'}
-            </button>
+            </Button>
         </form>
     )
 }

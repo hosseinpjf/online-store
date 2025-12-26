@@ -2,12 +2,11 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { Button, FloatingLabel, Form } from 'react-bootstrap';
 
 import { checkOtp } from 'services/auth';
 import { setCookie } from 'utils/cookie';
 import { getProfile } from 'services/user';
-
-import styles from './checkOtpForm.module.css';
 
 function CheckOtpForm({ code, setCode, mobile, setStep }) {
     const [clicked, setClicked] = useState(false);
@@ -36,15 +35,27 @@ function CheckOtpForm({ code, setCode, mobile, setStep }) {
     }
 
     return (
-        <form onSubmit={submitHandler} className={styles.form}>
-            <h3>تایید کد ارسال شده</h3>
-            <p>کد پیامک شده به شماره "{mobile}" را وارد کنید</p>
-            <label htmlFor="input">کد تایید را وارد کنید</label>
-            <input type="text" value={code} onChange={e => setCode(e.target.value)} id='input' placeholder='کد تایید' />
-            <button type='submit' disabled={clicked}>
+        <form onSubmit={submitHandler} className="p-3 rounded-4">
+            <h3 className='mb-3'>تایید کد ارسال شده</h3>
+            <p className='mb-3'>کد پیامک شده به شماره «{mobile}» را وارد کنید</p>
+
+            <FloatingLabel
+                label="کد تایید را وارد کنید"
+                className="mb-3 px-0"
+            >
+                <Form.Control
+                    type="number"
+                    onChange={e => setCode(e.target.value)}
+                    value={code}
+                    className='w-100 px-3 bg-transparent rounded-2 border-1 border-disabled fw-light'
+                    placeholder=""
+                />
+            </FloatingLabel>
+
+            <Button type='submit' className='bg-transparent color-accent border-accent rounded-2' disabled={clicked}>
                 {clicked ? 'درحال چک...' : 'ورود'}
-            </button>
-            <button onClick={() => setStep(1)}>تغییر شماره تلفن</button>
+            </Button>
+            <Button onClick={() => setStep(1)} className='bg-transparent color-error border-error me-3 rounded-2'>تغییر شماره تلفن</Button>
         </form>
     )
 }

@@ -5,7 +5,7 @@ function Layout({ children }) {
   return (
     <>
       <Header />
-      <main style={{ minHeight: '100dvh' }}>
+      <main style={{ minHeight: 'calc(100dvh - 70px - 60px)' }}>
         {children}
       </main>
       <Footer />
