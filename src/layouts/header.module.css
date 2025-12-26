@@ -4,12 +4,12 @@
 }
 
 .headerLogo {
-    width: 50px;
+    width: 70px !important;
 }
 
 @media (min-width: 768px) {
     .headerLogo {
-        width: 80px;
+        width: 90px !important;
     }
 }
 

@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button } from "react-bootstrap";
+import { Button, Ratio } from "react-bootstrap";
 import { BiLogInCircle, BiLogOutCircle } from "react-icons/bi"
 import { RiAdminLine } from "react-icons/ri";
 import { TiPlusOutline } from "react-icons/ti";
@@ -41,11 +41,11 @@ function Header() {
                     </Button>
                 </div>
             )}
-            <div className={`${styles.headerLogo} overflow-hidden h-100`}>
+            <Ratio aspectRatio="1x1" className={`${styles.headerLogo} overflow-hidden`}>
                 <Link to='/' className="w-100 h-100">
-                    <img src="divar.svg" alt="" className="w-100 h-100" />
+                    <img src="logo.png" alt="" className="image-fit" />
                 </Link>
-            </div>
+            </Ratio>
             <div className="btn-group gap-2">
                 {data?.role == 'ADMIN' && (
                     <Button className="bg-transparent p-0 border-neutral bg-neutral rounded-2 color-side-svg">
