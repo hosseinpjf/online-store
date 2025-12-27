@@ -49,7 +49,7 @@ function CategoryList() {
             {isLoading ? <Loader /> : (
                 <ul className="p-0 d-flex gap-3 flex-wrap">
                     {data?.map(item => (
-                        <li key={item._id} className="flex-grow-1 bg-surface border border-2 border-disabled d-flex align-items-center justify-content-between gap-2 p-3">
+                        <li key={item._id} className="flex-grow-1 bg-surface border border-2 border-disabled d-flex align-items-center justify-content-between gap-2 p-3 rounded-3">
                             {categoryIcon(item.icon)}
                             <span className="ms-auto">{item.name}</span>
                             <span className="color-secondary">slug: {encodeURIComponent(item.slug)}</span>
