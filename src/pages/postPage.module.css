@@ -3,6 +3,32 @@
     direction: ltr;
 }
 
+:global(.carousel-indicators) {
+    margin: 0 !important;
+    bottom: -25px !important;
+}
+
+:global(.carousel-indicators > button) {
+    background-color: var(--color-neutral) !important;
+}
+
+:global(.carousel-control-prev span),
+:global(.carousel-control-next span) {
+    background-color: var(--color-neutral) !important;
+    border-radius: 50%;
+    background-size: 50% !important;
+    background-position: center center !important;
+}
+
+:global(.carousel-control-prev),
+:global(.carousel-control-next) {
+    top: 50% !important;
+    transform: translateY(-50%);
+    height: 2rem !important;
+    width: auto !important;
+    margin: 0 1.5vw;
+}
+
 .main>div {
     flex: 1 1 50%;
 }
@@ -14,6 +40,6 @@
     }
 }
 
-.deletePost{
+.deletePost {
     bottom: 30px;
 }
