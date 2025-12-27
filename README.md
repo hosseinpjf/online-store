@@ -1,19 +1,16 @@
 # **Resume Portfolio**
-![Project Logo](/logo.png)
 
-## **created by Hossein Pourjafarabadi**
-
+> **created by Hossein Pourjafarabadi**  
 > This is my personal resume project.
 
----
-### **Overview**
+## **Overview**
 
 This project is a personal resume portfolio designed to showcase my skills with elegance and simplicity.  
 It emphasizes secure **authorization** and **authentication**, built entirely with **React** and smoothly integrated with **SAP**.  
 Input fields are protected with strong validation to prevent malicious scripts **(XSS)**, ensuring both usability and security.  
 Additionally, the project is designed with a **mobile-first approach**, ensuring optimal performance and accessibility across all devices.
 
-### **Installation & Usage**
+## **Installation & Usage**
 
 1. **Prerequisites**
    - Node.js 18+ and npm installed
@@ -33,7 +30,7 @@ Additionally, the project is designed with a **mobile-first approach**, ensuring
 For proper functionality, this project also requires the backend service to be running.  
 You can obtain and set up the backend project from: [Backend Repository Link](https://github.com/YourUser/YourBackendRepo)
 
-### **Pages**
+## **Pages**
 
 - **Home**: Displays all posts in the application.
 
@@ -46,7 +43,7 @@ You can obtain and set up the backend project from: [Backend Repository Link](ht
 - **Admin Panel (Admin)**: Provides tools to manage categories.  
 To access the admin panel, use the phone number `09131313131`.
 
-### **Dependencies**
+## **Dependencies**
 
 Here are the key dependencies used in this project:
 
@@ -64,7 +61,7 @@ Here are the key dependencies used in this project:
 | **React Icons** | Collection of popular icons as React components. |
 | **React Loader Spinner** | Loading spinner components to indicate data fetching or processing. |
 
-### **Contact** 
+## **Contact** 
    
    - **GitHub**: https://github.com/hosseinpjf
    - **Email**: hpourjafarabadi.dev@gmail.com
