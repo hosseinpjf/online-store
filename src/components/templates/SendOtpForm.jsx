@@ -9,7 +9,10 @@ function SendOtpForm({ setStep, setMobile, mobile }) {
 
     const sendHandler = async e => {
         e.preventDefault();
-        if (mobile.length != 11) return;
+        if (mobile.length != 11) {
+            toast.error('تعداد ارقام شماره درست نمی باشد', {id: 'mobileNumbers'})
+            return
+        };
 
         setClicked(true);
         try {

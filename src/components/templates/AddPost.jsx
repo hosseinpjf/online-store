@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
+import DOMPurify from 'dompurify'
 
 import { getCategory } from 'services/admin'
 import { addPost } from 'services/user';
@@ -48,19 +49,31 @@ function AddPost() {
             return
         };
 
-        let validate = form.images?.every(image => image.edited);
+        const validate = form.images?.every(image => image.edited);
         if (!validate) {
             toast.error("همه‌ی عکس‌ها باید ویرایش شده باشند", { id: 'imagesValidate' });
             return
         }
 
+        const safeData = {
+            ...form,
+            title: DOMPurify.sanitize(form.title),
+            content: DOMPurify.sanitize(form.content),
+            city: DOMPurify.sanitize(form.city),
+        }
+        const checkForm = Object.keys(form).every(key => safeData[key] === form[key]);
+        if (!checkForm) {
+            toast.error('ورودی مشکوک شناسایی شد!');
+            return
+        }
+
         const formData = new FormData();
-        for (const item in form) {
+        for (const item in safeData) {
             if (item != "images") {
-                formData.append(item, form[item]);
+                formData.append(item, safeData[item]);
             }
             else {
-                form[item]?.forEach(image => {
+                safeData[item]?.forEach(image => {
                     formData.append(item, image.fileImage);
                 })
             }

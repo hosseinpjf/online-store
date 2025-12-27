@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Accordion, Button, FloatingLabel, Form } from "react-bootstrap";
+import DOMPurify from 'dompurify';
 
 import { addCategory } from "services/admin";
 import icons from "constants/icons";
@@ -33,7 +34,24 @@ function CategoryForm() {
             return
         };
 
-        mutate(form);
+        const slugRegex = /^[A-Za-z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)*$/;
+        if (!slugRegex.test(form.slug)) {
+            toast.error('اسلاگ نامعتبر است! فقط حروف انگلیسی، اعداد و خط فاصله مجاز هستند', { id: 'slugValidation' });
+            return
+        }
+
+        const safeData = {
+            ...form,
+            name: DOMPurify.sanitize(form.name),
+            slug: DOMPurify.sanitize(form.slug),
+        }
+        const checkForm = Object.keys(form).every(key => safeData[key] === form[key]);
+        if (!checkForm) {
+            toast.error('ورودی مشکوک شناسایی شد!');
+            return
+        }
+
+        mutate(safeData);
         setForm({ name: "", slug: "", icon: "" });
     }
 
@@ -46,7 +64,14 @@ function CategoryForm() {
                         label="اسم دسته بندی"
                         className="h-100 px-0"
                     >
-                        <Form.Control className='px-3 bg-surface border-1 border-neutral fw-light' type="text" name='name' value={form.name} onChange={changeHandler} placeholder="" />
+                        <Form.Control
+                            type="text"
+                            name='name'
+                            value={form.name}
+                            onChange={changeHandler}
+                            placeholder=""
+                            className='px-3 bg-surface border-1 border-neutral fw-light'
+                        />
                     </FloatingLabel>
                 </div>
                 <div className='flex-grow-1 h-100'>
@@ -54,7 +79,15 @@ function CategoryForm() {
                         label="اسلاگ"
                         className="h-100 px-0"
                     >
-                        <Form.Control className='px-3 bg-surface border-1 border-neutral fw-light direction-ltr' type="text" name='slug' value={form.slug} onChange={changeHandler} placeholder="" />
+                        <Form.Control
+                            type="text"
+                            name='slug'
+                            value={form.slug}
+                            onChange={changeHandler}
+                            placeholder=""
+                            inputMode="latin"
+                            className='px-3 bg-surface border-1 border-neutral fw-light direction-ltr'
+                        />
                     </FloatingLabel>
                 </div>
             </div>

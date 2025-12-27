@@ -52,7 +52,7 @@ function CategoryList() {
                         <li key={item._id} className="flex-grow-1 bg-surface border border-2 border-disabled d-flex align-items-center justify-content-between gap-2 p-3">
                             {categoryIcon(item.icon)}
                             <span className="ms-auto">{item.name}</span>
-                            <span className="color-secondary">slug: {item.slug}</span>
+                            <span className="color-secondary">slug: {encodeURIComponent(item.slug)}</span>
                             <Button
                                 onClick={() => deleteHandler(item._id)}
                                 disabled={item._id == disabledId}

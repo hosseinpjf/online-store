@@ -20,7 +20,10 @@ function CheckOtpForm({ code, setCode, mobile, setStep }) {
 
     const submitHandler = async (event) => {
         event.preventDefault();
-        if (code.length != 5) return;
+        if (code.length != 5) {
+            toast.error('کد باید 5 رقم داشته باشد', {id: 'codeNumbers'})
+            return
+        };
 
         setClicked(true);
         try {
@@ -29,7 +32,7 @@ function CheckOtpForm({ code, setCode, mobile, setStep }) {
             refetch();
             navigate('/');
         } catch (error) {
-            toast.error('مشکلی پیش آمده');
+            toast.error('کد وارد شده نادرست میباشد');
             setClicked(false);
         }
     }

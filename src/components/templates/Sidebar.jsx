@@ -11,7 +11,7 @@ function Sidebar({ categories, setSearchParams, searchParams }) {
     const { showOffcanvas, setShowOffcanvas } = useStore();
 
     const addUrlQuery = slug => {
-        setSearchParams({ category: slug });
+        setSearchParams({ category: encodeURIComponent(slug) });
         setShowOffcanvas(false);
         window.scrollTo(0, 0);
     }
