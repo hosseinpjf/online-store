@@ -28,7 +28,7 @@ Additionally, the project is designed with a **mobile-first approach**, ensuring
 5. **Then open the browser and go to the given url**
 6. **Backend Requirement**  
 For proper functionality, this project also requires the backend service to be running.  
-You can obtain and set up the backend project from: [Backend Repository Link](https://github.com/YourUser/YourBackendRepo)
+You can obtain and set up the backend project from: [Backend Repository Link](https://github.com/hosseinpjf/api-online-store)
 
 ## **Pages**
 
@@ -41,7 +41,7 @@ You can obtain and set up the backend project from: [Backend Repository Link](ht
 - **Dashboard**: Enables users to create their own posts by specifying title, category, image, and other details.  
 
 - **Admin Panel (Admin)**: Provides tools to manage categories.  
-To access the admin panel, use the phone number `09131313131`.
+To access the admin panel, use the phone number `09135858913`.
 
 ## **Dependencies**
 
