@@ -219,6 +219,10 @@ button:disabled {
   color: var(--color-link) !important;
 }
 
+.color-neutral{
+  color: var(--color-neutral) !important;
+}
+
 .color-hover-smooth:hover {
   color: var(--hover-smooth) !important;
   transition: color .1s ease;

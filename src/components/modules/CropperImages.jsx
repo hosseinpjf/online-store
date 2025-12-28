@@ -83,6 +83,7 @@ function CropperImages({ form, setForm, accordionKey, setAccordionKey }) {
                                             <input
                                                 type="radio"
                                                 name="selectImage"
+                                                title="انتخاب عکس به عنوان پوستر پست"
                                                 checked={index == form.mainPhoto}
                                                 onChange={() => setForm(prevForm => ({ ...prevForm, mainPhoto: index }))}
                                                 className="position-absolute z-1 top-0 end-0 m-2 cursor-pointer"

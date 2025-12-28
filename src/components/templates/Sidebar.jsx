@@ -60,10 +60,10 @@ function Sidebar({ categories, setSearchParams, searchParams }) {
                                 active={categoryParams == category.slug}
                                 onClick={() => addUrlQuery(category.slug)}
                                 title={category.name}
-                                className="bg-transparent border-0 border-bottom py-2 my-1 border-color rounded-0 color-neutral d-flex align-items-center justify-content-start gap-3"
+                                className="bg-transparent border-0 border-bottom py-2 my-1 border-color rounded-0 d-flex align-items-center justify-content-start gap-3"
                             >
                                 {categoryIcon(category.icon)}
-                                <span className="single-line w-100">
+                                <span className="single-line w-100 color-neutral">
                                     {category.name}
                                 </span>
                             </ListGroup.Item>

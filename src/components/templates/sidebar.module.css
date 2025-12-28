@@ -11,9 +11,10 @@
     display: none;
 }
 
-:global(.offcanvas-body .list-group-item:hover) {
+:global(.offcanvas-body .list-group-item:hover),
+:global(.offcanvas-body .list-group-item:hover span) {
     background-color: var(--hover-smooth) !important;
-    color: var(--color-neutral);
+    color: var(--color-main-text) !important;
 }
 
 :global(.offcanvas-body .list-group-item:hover svg path) {
@@ -24,6 +25,10 @@
     border-right: 2px solid var(--color-accent) !important;
     color: var(--color-main-text) !important;
     background-color: var(--hover-smooth) !important;
+}
+
+:global(.offcanvas-body .list-group-item.active span) {
+    color: var(--color-main-text) !important;
 }
 
 :global(.offcanvas-body .list-group-item.active svg path) {
