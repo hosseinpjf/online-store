@@ -1,6 +1,6 @@
 # **Resume Portfolio**
 
-> **created by Hossein Pourjafarabadi**  
+> **Developed By Hossein Pourjafarabadi**  
 > This is my personal resume project.
 
 ## **Overview**
@@ -10,7 +10,7 @@ It emphasizes secure **authorization** and **authentication**, built entirely wi
 Input fields are protected with strong validation to prevent malicious scripts **(XSS)**, ensuring both usability and security.  
 Additionally, the project is designed with a **mobile-first approach**, ensuring optimal performance and accessibility across all devices.
 
-## **Installation & Usage**
+## **Installation & Setup**
 
 1. **Prerequisites**
    - Node.js 18+ and npm installed
@@ -22,7 +22,7 @@ Additionally, the project is designed with a **mobile-first approach**, ensuring
 3. **Install dependencies**
    ```bash
    npm install
-4. **Start development server**
+4. **Start the project**
    ```bash
    npm run dev
 5. **Then open the browser and go to the given url**
