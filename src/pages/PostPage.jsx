@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom'
 import toast from 'react-hot-toast';
 import { Button, Carousel, Ratio } from 'react-bootstrap';
+
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 import { deletePost, getPost, getProfile } from 'services/user';
@@ -45,8 +46,6 @@ function PostPage() {
             toast.error('حذف پست به مشکل خورد لطفا دوباره تلاش کنید', { id: 'deleltePost' });
         }
     })
-
-    console.log(data);
 
     if (isLoading) return <Loader />;
     return (

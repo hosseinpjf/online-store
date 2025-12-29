@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import toast from "react-hot-toast"
 
 import { getProfile } from "services/user"
 
@@ -32,17 +31,11 @@ function Router() {
         queryFn: getProfile,
     });
 
-    // useEffect(() => {
-    //     if (isError) toast.error('ورود به حساب کاربری شما با مشکل مواجه شد لطفا دوباره لاگین کنید', { id: 'getNewToken' });
-    // }, [isError]);
-
-    console.log(data);
-
     if (isLoading) return <Loader />;
     return (
         <Routes>
             {showError ? (
-                <Route path="/*" element={<GlobalErrorFallback setShowError={setShowError} />} />
+                <Route path="/*" element={<GlobalErrorFallback />} />
             ) : (
                 <>
                     <Route index element={<HomePage />} />

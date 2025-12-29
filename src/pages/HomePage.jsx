@@ -24,7 +24,7 @@ function HomePage() {
   return (
     <>
       {postsLoading || categoriesLoading ? <Loader /> : (
-        <div className="d-flex" style={{minHeight: "100dvh" }}>
+        <div className="d-flex">
           <Sidebar categories={categories} setSearchParams={setSearchParams} searchParams={searchParams} />
           <Main posts={posts} categories={categories} searchParams={searchParams} />
         </div>

@@ -28,16 +28,13 @@ api.interceptors.response.use(
     },
     async error => {
         const refreshToken = getCookie('refreshToken');
-        // برای گرفتن مشخصات درخواستی که به خطا خورده
         const orginalRequest = error.config;
-        // کلید (_retry) را خودمان به مشخصات درخواست اضافه میکنیم تا نگذاریم عملیات بیشتر از یک بار تکرار شود
         if (error.response?.status == 401 && !orginalRequest._retry && refreshToken) {
             orginalRequest._retry = true;
 
             try {
                 const res = await getNewTokens(refreshToken);
                 setCookie(res);
-                // تکرار درخواست با دادن مشخصات درخواست به axios 
                 return api(orginalRequest);
             } catch (err) {
                 toast.error('ورود به حساب کاربری شما با مشکل مواجه شد لطفا دوباره لاگین کنید', { id: 'getNewToken' });

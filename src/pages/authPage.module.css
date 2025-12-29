@@ -1,3 +1,7 @@
+.container{
+    min-height: calc(100dvh - 70px - 60px);
+}
+
 .container::after {
     content: '';
     position: absolute;

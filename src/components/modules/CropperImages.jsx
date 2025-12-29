@@ -1,7 +1,7 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { Cropper } from "react-cropper";
-import "cropperjs/dist/cropper.css";
 import { Accordion, Button, Ratio } from "react-bootstrap";
+
 import { GoZoomIn } from "react-icons/go";
 import { GoZoomOut } from "react-icons/go";
 import { GiAnticlockwiseRotation } from "react-icons/gi";
@@ -10,6 +10,7 @@ import { PiFlipHorizontalFill } from "react-icons/pi";
 import { PiFlipVerticalFill } from "react-icons/pi";
 import { GrStatusGood } from "react-icons/gr";
 
+import "cropperjs/dist/cropper.css";
 import styles from "./cropperImages.module.css"
 
 function CropperImages({ form, setForm, accordionKey, setAccordionKey }) {

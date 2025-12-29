@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast";
+import { Button } from "react-bootstrap";
+
+import { RiDeleteBin7Line } from "react-icons/ri";
 
 import { deleteCategory, getCategory } from "services/admin"
 import icons from "constants/icons";
@@ -8,8 +11,6 @@ import icons from "constants/icons";
 import Loader from "components/modules/Loader";
 
 import styles from "./CategoryList.module.css";
-import { Button } from "react-bootstrap";
-import { RiDeleteBin7Line } from "react-icons/ri";
 
 function CategoryList() {
     const queryClient = useQueryClient();

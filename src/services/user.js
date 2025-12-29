@@ -1,8 +1,6 @@
 import { api } from "configs/api"
 import { requestHandler } from "helpers/helper";
 
-// برای اینکه undefined بر نگردونه با این شرط یا جواب درخواست رو میده یا false رو 
-// const getProfile = async () => await api.get('user/whoami').then(res => res || false);
 const getProfile = () => requestHandler(() => api.get('user/whoami')).then(res => res || false);
 
 const addPost = formData => requestHandler(() => api.post('post/create', formData, { headers: { "Content-Type": 'multipart/form-data' } }));

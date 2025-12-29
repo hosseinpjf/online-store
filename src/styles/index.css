@@ -3,73 +3,41 @@
   font-weight: 400;
   line-height: 1.5;
 
-  /* پس‌زمینه کل سایت */
+  /* light mode */
   --color-background: #f7f8fa;
-  /* رنگ پس زمینه دوم */
   --color-side: #f0f2f5;
-  /* رنگ باکس‌ها یا کارت‌ها */
   --color-surface: #fafafa;
-  /* متن اصلی */
   --color-main-text: #212529;
-  /* متن کنار */
   --color-side-text: #f1f3f5;
-  /* رنگ تاکید */
   --color-accent: #ff5722;
-  /* رنگ موفقیت */
   --color-success: #28a745;
-  /* رنگ خطا */
   --color-error: #90101c;
-  /* رنگ هشدار */
   --color-warning: #ffc107;
-  /* رنگ لینک */
   --color-link: #0d6efd;
-  /* رنگ غیر فعال */
   --color-disabled: #adb5bd;
-  /* زیر متن ها */
   --color-secondary: #6c757d;
-  /* رنگ خنثی */
   --color-neutral: #808080;
-  /* hover */
   --hover-smooth: #e9ecef;
-  /* border */
   --border-color: #e0e0e0;
 
-
-  /* پس‌زمینه کل سایت
-  --color-background: #121212;
-  رنگ پس زمینه دوم
+  /* dark mode */
+  /* --color-background: #121212;
   --color-side: #1e1e1e;
-  رنگ باکس‌ها یا کارت‌ها
   --color-surface: #1a1a1a;
-  متن اصلی
   --color-main-text: #f1f3f5;
-  متن کنار
   --color-side-text: #212529;
-  رنگ تاکید
   --color-accent: #ff7043;
-  رنگ موفقیت
   --color-success: #4caf50;
-  رنگ خطا
-  --colot-error: #f44336;
-  رنگ هشدار
+  --color-error: #f44336;
   --color-warning: #ffc107;
-  رنگ لینک
   --color-link: #4da3ff;
-  رنگ غیر فعال
   --color-disabled: #6c757d;
-  زیر متن ها
   --color-secondary: #9ca3af;
-  رنگ خنثی
   --color-neutral: #808080;
-  hover
   --hover-smooth: #2a2a2a;
-  border
   --border-color: #2c2c2c; */
 
-
-  /* فونت */
   --main-font: "Vazir", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  /* انیمیشن تغییر رنگ صفحه */
   --change-color: background-color 0s linear, color 0s linear;
 }
 
@@ -116,10 +84,6 @@ button {
   transition: transform .2s ease-in-out;
 }
 
-/* button:active {
-  transform: scale(.99);
-} */
-
 button:disabled {
   opacity: 0.5;
 }
@@ -141,10 +105,6 @@ button:disabled {
 .bg-surface {
   background-color: var(--color-surface) !important;
 }
-
-/* .bg-main-text {
-  background-color: var(--color-main-text) !important;
-} */
 
 .bg-accent {
   background-color: var(--color-accent) !important;

@@ -1,22 +1,24 @@
+import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom"
 
-function GlobalErrorFallback({ setShowError }) {
+import styles from './globalErrorFallback.module.css';
+
+function GlobalErrorFallback() {
     const navigate = useNavigate();
 
     const refreshHandler = () => {
-        navigate('/');
+        navigate('/', { replace: true });
         window.location.reload()
     }
 
     return (
-        <div style={{ padding: '100px 20px 0' }}>
-            <div style={{ width: '100%', maxWidth: '500px', margin: '0 auto', padding: '20px', backgroundColor: '#a58e9a', position: 'relative' }}>
-                <div style={{ position: 'relative', zIndex: '1' }}>
-                    <h1 style={{ textAlign: 'center' }}>مشکلی پیش آمده</h1>
-                    <p style={{ textAlign: 'center', margin: '20px 0 30px' }}>در ارتباط با سرور خطایی رخ داده است. لطفاً دوباره تلاش کنید.</p>
-                    <button onClick={refreshHandler} style={{ margin: '0 auto', display: 'block', padding: '10px 20px', cursor: 'pointer' }}>بارگذاری مجدد</button>
+        <div className={`${styles.container} mx-4 d-flex align-items-center`}>
+            <div className="bg-error w-100 mx-auto p-4 position-relative rounded-3">
+                <div className="position-relative z-1">
+                    <h1 className="text-center color-side-text">مشکلی پیش آمده</h1>
+                    <p className="text-center my-3 mx-4 color-side-text">در ارتباط با سرور خطایی رخ داده است! لطفاً دوباره تلاش کنید.</p>
+                    <Button onClick={refreshHandler} className="mx-auto d-block py-2 px-3 cursor-pointer bg-transparent color-success border-success">بارگذاری مجدد</Button>
                 </div>
-                <span style={{ position: 'absolute', top: '60%', left: '50%', zIndex: '0', color: 'rgba(255, 255, 255, 0.1)', fontSize: '200px', fontWeight: 'bolder', transform: 'translate(-50%, -50%)' }}>500</span>
             </div>
         </div>
     )

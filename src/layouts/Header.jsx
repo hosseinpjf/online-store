@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Ratio } from "react-bootstrap";
+
 import { BiLogInCircle, BiLogOutCircle } from "react-icons/bi"
 import { RiAdminLine } from "react-icons/ri";
 import { TiPlusOutline } from "react-icons/ti";
@@ -28,7 +29,6 @@ function Header() {
         navigate('/');
         deleteCookie('refreshToken');
         deleteCookie('accessToken');
-        // برای این که داده های این کلید پاک بشه و تمام کامپوننت های استفاده کننده از این درخواست در لحظه ری رندر بشن
         queryClient.setQueryData(['profile'], null);
     }
 
