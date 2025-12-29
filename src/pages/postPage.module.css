@@ -43,3 +43,9 @@
 .deletePost {
     bottom: 30px;
 }
+
+:global(.carousel.removeButton .carousel-indicators),
+:global(.carousel.removeButton .carousel-control-prev),
+:global(.carousel.removeButton .carousel-control-next){
+    display: none !important;
+}

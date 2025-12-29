@@ -42,9 +42,11 @@ function PostPage() {
             });
         },
         onError: () => {
-            toast.error('حذف پست به مشکل خورد لطفا دوباره تلاش کنید');
+            toast.error('حذف پست به مشکل خورد لطفا دوباره تلاش کنید', { id: 'deleltePost' });
         }
     })
+
+    console.log(data);
 
     if (isLoading) return <Loader />;
     return (
@@ -59,9 +61,9 @@ function PostPage() {
                 <div>
                     <div className={`${styles.parentCarousel} mx-auto`}>
                         {!!data.images.length ? (
-                            <Carousel activeIndex={index} onSelect={selectedIndex => setIndex(selectedIndex)}>
-                                {data.images.map(image => (
-                                    <Carousel.Item key={image}>
+                            <Carousel className={data.images.length <= 1 ? 'removeButton' : null} activeIndex={index} onSelect={selectedIndex => setIndex(selectedIndex)}>
+                                {data.images.map((image, index) => (
+                                    <Carousel.Item key={data?._id + image + index}>
                                         <Ratio aspectRatio="16x9" className='w-100'>
                                             <img
                                                 className='image-fit rounded-3'
