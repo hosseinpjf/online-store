@@ -1,4 +1,4 @@
-# **Online Store - Resume Portfolio**
+# **Online Store**
 
 > **Developed By Hossein Pourjafarabadi**  
 > This is my personal resume project.
