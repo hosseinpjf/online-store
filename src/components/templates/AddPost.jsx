@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import DOMPurify from 'dompurify'
 
-import { getCategory } from 'services/admin'
-import { addPost } from 'services/user';
+import { useGetCategory } from 'services/admin'
+import { useAddPost, useGetProfile } from 'services/user';
 
 import CropperImages from 'components/modules/CropperImages';
 
@@ -13,25 +13,11 @@ import 'styles/form.css'
 
 function AddPost() {
     const queryClient = useQueryClient();
-    const [form, setForm] = useState({ title: "", content: "", amount: null, city: "", category: "", images: [], mainPhoto: 0 });
-    const [accordionKey, setAccordionKey] = useState(null)
-
-    const { data } = useQuery({
-        queryKey: ['list-category'],
-        queryFn: getCategory,
-    });
-
-    const { mutate, isPending } = useMutation({
-        mutationFn: addPost,
-        onSuccess: () => {
-            toast.success('آگهی با موفقیت ایجاد شد');
-            ['my-post-list', 'posts-list'].forEach(key => {
-                queryClient.invalidateQueries({ queryKey: [key] });
-            });
-            queryClient.refetchQueries({ queryKey: ['posts-list'] });
-        },
-        onError: () => toast.error('مشکلی پیش آمده'),
-    })
+    const [form, setForm] = useState({ title: "", content: "", category: "", images: [], mainphoto: 0 });
+    const [accordionKey, setAccordionKey] = useState(null);
+    const { data } = useGetCategory();
+    const { mutate, isPending } = useAddPost();
+    const { data: profile } = useGetProfile();
 
     const changeHandler = event => {
         if (event.target.name !== "images") {
@@ -44,7 +30,7 @@ function AddPost() {
 
     const addHandler = async event => {
         event.preventDefault();
-        if (!form.amount || !form.category || !form.title) {
+        if (!form.category || !form.title) {
             toast.error("لطفا فیلد ها را پر کنید", { id: 'CheckFieldsComplete' });
             return
         };
@@ -59,7 +45,6 @@ function AddPost() {
             ...form,
             title: DOMPurify.sanitize(form.title),
             content: DOMPurify.sanitize(form.content),
-            city: DOMPurify.sanitize(form.city),
         }
         const checkForm = Object.keys(form).every(key => safeData[key] === form[key]);
         if (!checkForm) {
@@ -67,21 +52,21 @@ function AddPost() {
             return
         }
 
-        const formData = new FormData();
-        for (const item in safeData) {
-            if (item != "images") {
-                formData.append(item, safeData[item]);
+        mutate({ data: safeData, userId: profile.$id }, {
+            onSuccess: () => {
+                toast.success('آگهی با موفقیت ایجاد شد');
+                ['my-post-list', 'posts-list'].forEach(key => {
+                    queryClient.invalidateQueries({ queryKey: [key] });
+                });
+                queryClient.refetchQueries({ queryKey: ['posts-list'] });
+            },
+            onError: (error) => {
+                toast.error('مشکلی پیش آمده');
+                console.log(error);
             }
-            else {
-                safeData[item]?.forEach(image => {
-                    formData.append(item, image.fileImage);
-                })
-            }
-        }
-
-        mutate(formData);
+        });
         setAccordionKey(null);
-        setForm({ title: "", content: "", amount: null, city: "", category: "", images: [], mainPhoto: 0 })
+        setForm({ title: "", content: "", category: "", images: [], mainphoto: 0 })
     }
 
     return (
@@ -105,26 +90,10 @@ function AddPost() {
                     </FloatingLabel>
                 </div>
                 <div className='flex-grow-1 h-100'>
-                    <FloatingLabel
-                        label="قیمت"
-                        className="h-100 px-0"
-                    >
-                        <Form.Control onChange={changeHandler} value={form.amount || ""} className='px-3 bg-surface border-1 border-neutral fw-light' type="number" name='amount' placeholder="" />
-                    </FloatingLabel>
-                </div>
-                <div className='flex-grow-1 h-100'>
-                    <FloatingLabel
-                        label="شهر"
-                        className="h-100 px-0"
-                    >
-                        <Form.Control onChange={changeHandler} value={form.city} className='px-3 bg-surface border-1 border-neutral fw-light' type="text" name='city' placeholder="" />
-                    </FloatingLabel>
-                </div>
-                <div className='flex-grow-1 h-100'>
                     <FloatingLabel label="دسته بندی">
                         <Form.Select onChange={changeHandler} value={form.category} name="category" className='px-3 bg-surface cursor-pointer border-1 border-neutral fw-light'>
                             <option value="" disabled className='bg-disabled color-side-text'>انتخاب کنید</option>
-                            {data?.map(item => <option key={item._id} value={item._id} className='cursor-pointer fw-light bg-surface'>{item.name}</option>)}
+                            {data?.documents.map(item => <option key={item.$id} value={item.$id} className='cursor-pointer fw-light bg-surface'>{item.name}</option>)}
                         </Form.Select>
                     </FloatingLabel>
                 </div>
@@ -143,7 +112,9 @@ function AddPost() {
             <div style={{ width: '100%' }}>
                 <CropperImages form={form} setForm={setForm} accordionKey={accordionKey} setAccordionKey={setAccordionKey} />
             </div>
-            <Button type='submit' onClick={addHandler} disabled={isPending} className='w-100 bg-surface color-accent border-2 py-2 rounded-2 border-accent mt-2 mt-md-3 mt-xl-4'>ایجاد</Button>
+            <Button type='submit' onClick={addHandler} disabled={isPending} className='w-100 bg-surface color-accent border-2 py-2 rounded-2 border-accent mt-2 mt-md-3 mt-xl-4'>
+                {isPending ? 'درحال ایجاد' : 'ایجاد'}
+            </Button>
         </form>
     )
 }

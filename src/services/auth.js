@@ -1,10 +1,45 @@
-import { api } from "configs/api";
-import { requestHandler } from "helpers/helper";
+import { useMutation } from "@tanstack/react-query";
+import { account, ID } from "configs/appwrite";
+
+const useRegister = () => {
+    return useMutation({
+        mutationFn: async ({ email, password, name }) => {
+            await account.create({
+                email,
+                password,
+                name,
+                userId: ID.unique(),
+            });
+            await account.createEmailPasswordSession({
+                email,
+                password,
+            });
+            await account.createVerification({
+                url: 'http://localhost:5173/',
+            });
+            return { name, email };
+        }
+    })
+}
+
+const useLogin = () => {
+    return useMutation({
+        mutationFn: async ({email, password}) => {
+            return await account.createEmailPasswordSession({
+                email,
+                password,
+            })
+        }
+    })
+}
+
+const useLogOut = () => {
+    return useMutation({
+        mutationFn: async () => {
+            return await account.deleteSession('current');
+        }
+    })
+}
 
 
-const sendOtp = (mobile) => requestHandler(() => api.post('/auth/send-otp', { mobile }));
-
-const checkOtp = (mobile, code) => requestHandler(() => api.post('/auth/check-otp', { mobile, code }));
-
-
-export { sendOtp, checkOtp };
+export { useRegister, useLogin, useLogOut };

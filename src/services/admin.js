@@ -1,12 +1,52 @@
-import { api } from "configs/api"
-import { requestHandler } from "helpers/helper";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { Permission, Role } from "appwrite";
+import { databases, ID } from "configs/appwrite";
+
+const databaseId = import.meta.env.VITE_DATABASE_ID;
+const collectionId = 'categories';
+
+const useAddCategory = () => {
+    return useMutation({
+        mutationFn: async data => {
+            return await databases.createDocument({
+                databaseId,
+                collectionId,
+                documentId: ID.unique(),
+                data,
+                // permissions: [
+                //     Permission.read(Role.any()),
+                //     Permission.create(Role.role("admin")),
+                //     Permission.update(Role.role("admin")),
+                //     Permission.delete(Role.role("admin")),
+                // ],
+            })
+        }
+    })
+}
+
+const useGetCategory = () => {
+    return useQuery({
+        queryKey: ['list-category'],
+        queryFn: async () => {
+            return await databases.listDocuments({
+                collectionId,
+                databaseId,
+            })
+        }
+    })
+}
+
+const useDeleteCategory = () => {
+    return useMutation({
+        mutationFn: async id => {
+            return await databases.deleteDocument({
+                collectionId,
+                databaseId,
+                documentId: id
+            })
+        }
+    })
+}
 
 
-const addCategory = data => requestHandler(() => api.post('category', data));
-
-const getCategory = () => requestHandler(() => api.get('category'));
-
-const deleteCategory = id => requestHandler(() => api.delete(`category/${id}`));
-
-
-export { addCategory, getCategory, deleteCategory };
+export { useAddCategory, useGetCategory, useDeleteCategory };

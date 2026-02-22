@@ -54,9 +54,9 @@ function Sidebar({ categories, setSearchParams, searchParams }) {
                             className={`${styles.allCategory} pe-5 bg-transparent border-0 border-bottom py-2 my-1 border-color single-line rounded-0 color-neutral position-relative`}
                         >همه
                         </ListGroup.Item>
-                        {categories?.map(category => (
+                        {categories?.documents.map(category => (
                             <ListGroup.Item
-                                key={category._id}
+                                key={category.$id}
                                 action
                                 active={categoryParams == category.slug}
                                 onClick={() => addUrlQuery(category.slug)}

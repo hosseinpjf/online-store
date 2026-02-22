@@ -1,14 +1,15 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { Button, Ratio } from "react-bootstrap";
+import toast from "react-hot-toast";
 
 import { BiLogInCircle, BiLogOutCircle } from "react-icons/bi"
 import { RiAdminLine } from "react-icons/ri";
 import { TiPlusOutline } from "react-icons/ti";
 import { CgMenu } from "react-icons/cg";
 
-import { deleteCookie, getCookie } from "utils/cookie"
-import { getProfile } from "services/user";
+import { useGetProfile } from "services/user";
+import { useLogOut } from "services/auth";
 import useStore from "store/store";
 
 import styles from "./header.module.css"
@@ -16,20 +17,18 @@ import styles from "./header.module.css"
 function Header() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
-    const refreshToken = getCookie('refreshToken');
-    const { setShowOffcanvas } = useStore();
     const location = useLocation();
-
-    const { data, isError } = useQuery({
-        queryKey: ['profile'],
-        queryFn: getProfile
-    })
+    const { setShowOffcanvas } = useStore();
+    const { data } = useGetProfile();
+    const { mutate } = useLogOut();
 
     const signOutHandler = () => {
-        navigate('/');
-        deleteCookie('refreshToken');
-        deleteCookie('accessToken');
         queryClient.setQueryData(['profile'], null);
+        navigate('/');
+        mutate(undefined, {
+            onSuccess: () => toast.success('شما با موفقیت از حسابتون خارج شدید', { id: 'logOutSuccess' }),
+            onError: () => toast.error('خروج از حساب شما با مشکل مواجه شد', { id: 'logOutError' }),
+        })
     }
 
     return (
@@ -47,7 +46,7 @@ function Header() {
                 </Link>
             </Ratio>
             <div className="btn-group gap-2">
-                {data?.role == 'ADMIN' && (
+                {data?.labels[0] == 'admin' && (
                     <Button className="bg-transparent p-0 border-neutral bg-neutral rounded-2 color-side-svg">
                         <Link to='/admin' className="p-1 px-sm-3 py-sm-2">
                             <RiAdminLine fontSize="22px" />
@@ -55,7 +54,7 @@ function Header() {
                         </Link>
                     </Button>
                 )}
-                {refreshToken && !isError ? (
+                {data ? (
                     <Button onClick={signOutHandler} className="bg-transparent p-1 px-sm-3 py-sm-2 border-neutral rounded-2">
                         <BiLogOutCircle fontSize="22px" />
                         <span className="me-2 d-none d-sm-inline fw-light">خروج</span>

@@ -1,10 +1,11 @@
 import { useState } from "react"
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Accordion, Button, FloatingLabel, Form } from "react-bootstrap";
 import DOMPurify from 'dompurify';
 
-import { addCategory } from "services/admin";
+import { useAddCategory } from "services/admin";
+
 import icons from "constants/icons";
 
 import "styles/form.css"
@@ -12,16 +13,7 @@ import "styles/form.css"
 function CategoryForm() {
     const [form, setForm] = useState({ name: "", slug: "", icon: "" });
     const queryClient = useQueryClient();
-
-    const { mutate, isPending } = useMutation({
-        mutationFn: addCategory,
-        onSuccess: () => {
-            toast.success('دسته بندی جدید با موفقیت اضافه شد');
-            queryClient.invalidateQueries('list-category');
-        },
-        onError: () => toast.error('اضافه شدن دسته بندی جدید با مشکل مواجه شد')
-    });
-
+    const { mutate, isPending } = useAddCategory();
 
     const changeHandler = event => {
         setForm({ ...form, [event.target.name]: event.target.value })
@@ -51,7 +43,13 @@ function CategoryForm() {
             return
         }
 
-        mutate(safeData);
+        mutate(safeData, {
+            onSuccess: () => {
+                toast.success('دسته بندی جدید با موفقیت اضافه شد');
+                queryClient.invalidateQueries({ queryKey: ['list-category'] });
+            },
+            onError: () => toast.error('اضافه شدن دسته بندی جدید با مشکل مواجه شد'),
+        });
         setForm({ name: "", slug: "", icon: "" });
     }
 

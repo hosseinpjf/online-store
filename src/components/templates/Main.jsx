@@ -8,8 +8,8 @@ function Main({ posts, searchParams, categories }) {
     useEffect(() => {
         const categoryParams = searchParams.get('category');
         if (categoryParams) {
-            const findCategory = categories?.find(c => c.slug == categoryParams);
-            const filteredPosts = posts?.posts.filter(post => post.category == findCategory?._id);
+            const findCategory = categories?.documents.find(c => c.slug == categoryParams);
+            const filteredPosts = posts?.documents.filter(post => post.category == findCategory?.$id);
             if (!filteredPosts.length) {
                 setDisplayed([]);
             }
@@ -18,7 +18,7 @@ function Main({ posts, searchParams, categories }) {
             }
         }
         else {
-            setDisplayed(posts?.posts);
+            setDisplayed(posts?.documents);
         }
     }, [searchParams]);
 
@@ -27,7 +27,7 @@ function Main({ posts, searchParams, categories }) {
             {!!displayed?.length ? (
                 <div className="p-0 m-0 d-flex flex-wrap gap-2 gap-sm-3 gap-lg-4 gap-xxl-5 justify-content-center justify-content-md-evenly">
                     {displayed?.map(post => (
-                        <PostCard key={post._id} post={post} />
+                        <PostCard key={post.$id} post={post} />
                     ))}
                 </div>
             ) : (

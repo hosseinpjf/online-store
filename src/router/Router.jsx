@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
-import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { useQueryClient } from "@tanstack/react-query"
 
-import { getProfile } from "services/user"
+import { useGetProfile } from "services/user"
 
 import AdminPage from "pages/AdminPage"
 import AuthPage from "pages/AuthPage"
@@ -16,6 +16,7 @@ import Loader from "components/modules/Loader"
 function Router() {
     const [showError, setShowError] = useState(false);
     const queryClient = useQueryClient();
+    const { data, isFetching } = useGetProfile();
 
     useEffect(() => {
         const unsubscribe = queryClient.getQueryCache().subscribe(event => {
@@ -26,12 +27,7 @@ function Router() {
         return () => unsubscribe();
     }, []);
 
-    const { data, isLoading } = useQuery({
-        queryKey: ['profile'],
-        queryFn: getProfile,
-    });
-
-    if (isLoading) return <Loader />;
+    if (isFetching) return <Loader />;
     return (
         <Routes>
             {showError ? (
@@ -42,7 +38,7 @@ function Router() {
                     <Route path="post/:id" element={<PostPage />} />
                     <Route path="/auth" element={data ? <Navigate to='/dashboard' /> : <AuthPage />} />
                     <Route path="/dashboard" element={data ? <DashboardPage /> : <Navigate to='/auth' />} />
-                    <Route path="/admin" element={data?.role == 'ADMIN' ? <AdminPage /> : <Navigate to='/' />} />
+                    <Route path="/admin" element={data?.labels[0] == 'admin' ? <AdminPage /> : <Navigate to='/' />} />
                     <Route path="/*" element={<NotFoundPage />} />
                 </>
             )}
