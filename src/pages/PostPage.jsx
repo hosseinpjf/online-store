@@ -6,19 +6,18 @@ import { Button, Carousel, Ratio } from 'react-bootstrap';
 
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-import { useDeletePost, useGetImage, useGetPost, useGetProfile } from 'services/user';
+import { useDeletePost, useGetImage, useGetPost } from 'services/user';
 
 import Loader from 'components/modules/Loader';
 
 import styles from './postPage.module.css';
 
-function PostPage() {
+function PostPage({ profile }) {
     const params = useParams();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const [index, setIndex] = useState(0);
     const { data, isFetching } = useGetPost(params.id);
-    const { data: profile } = useGetProfile();
     const { mutate } = useDeletePost();
 
     const deleteHandler = id => {

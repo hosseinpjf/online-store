@@ -35,7 +35,7 @@ function Router() {
             ) : (
                 <>
                     <Route index element={<HomePage />} />
-                    <Route path="post/:id" element={<PostPage />} />
+                    <Route path="post/:id" element={<PostPage profile={data} />} />
                     <Route path="/auth" element={data ? <Navigate to='/dashboard' /> : <AuthPage />} />
                     <Route path="/dashboard" element={data ? <DashboardPage /> : <Navigate to='/auth' />} />
                     <Route path="/admin" element={data?.labels[0] == 'admin' ? <AdminPage /> : <Navigate to='/' />} />
