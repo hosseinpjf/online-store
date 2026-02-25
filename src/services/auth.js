@@ -15,7 +15,7 @@ const useRegister = () => {
                 password,
             });
             await account.createVerification({
-                url: 'http://localhost:5173/',
+                url: 'https://online-store.pages.dev/',
             });
             return { name, email };
         }
