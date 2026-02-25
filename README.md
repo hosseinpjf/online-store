@@ -10,6 +10,12 @@ It emphasizes secure **authorization** and **authentication**, built entirely wi
 Input fields are protected with strong validation to prevent malicious scripts **(XSS)**, ensuring both usability and security.  
 Additionally, the project is designed with a **mobile-first approach**, ensuring optimal performance and accessibility across all devices.
 
+## **Live Demo**
+
+You can view the live version of this project here:
+[Online Demo Link](https://online-store.pages.dev)
+> Please note that users accessing the site from Iran may need a VPN due to regional restrictions.
+
 ## **Installation & Setup**
 
 1. **Prerequisites**
@@ -27,8 +33,7 @@ Additionally, the project is designed with a **mobile-first approach**, ensuring
    npm run dev
 5. **Then open the browser and go to the given url**
 6. **Backend Requirement**  
-For proper functionality, this project also requires the backend service to be running.  
-You can obtain and set up the backend project from: [Backend Repository Link](https://github.com/hosseinpjf/api-online-store)
+This project includes a backend service built using Appwrite, which handles authentication, database operations, and file management.
 
 ## **Pages**
 
@@ -51,7 +56,7 @@ Here are the key dependencies used in this project:
 |------------|-------------|
 | **React Router DOM** | Provides client-side routing to navigate between pages. |
 | **@tanstack/react-query** | Powerful data-fetching and state management library for handling server state. |
-| **Axios** | Promise-based HTTP client for making API requests. |
+| **Appwrite** | Provides authentication, database, storage, and backend services. |
 | **Bootstrap** | Popular CSS framework for responsive design and styling. |
 | **React Bootstrap** | React components built on top of Bootstrap for easier integration. |
 | **Zustand** | Lightweight state management library for managing global app state. |
